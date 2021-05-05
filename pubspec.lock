@@ -114,13 +114,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.1.4"
-  get_it:
-    dependency: "direct main"
-    description:
-      name: get_it
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "6.1.1"
   http_parser:
     dependency: transitive
     description:
@@ -135,6 +128,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.3"
+  jwt_decoder:
+    dependency: "direct main"
+    description:
+      name: jwt_decoder
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.1"
   logger:
     dependency: "direct main"
     description:

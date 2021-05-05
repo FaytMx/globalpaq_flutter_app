@@ -1,7 +1,7 @@
 import 'dart:convert';
-
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 
 class LocalAuth {
   static const KEY = "session";
@@ -17,7 +17,13 @@ class LocalAuth {
     if (data != null) {
       final requestToken = jsonDecode(data);
 
-      return requestToken;
+      final DateTime expiresAt = JwtDecoder.getExpirationDate(requestToken);
+
+      if (DateTime.now().isBefore(expiresAt)) {
+        return requestToken;
+      }
+      this.clearSession();
+      return null;
     }
 
     return null;
