@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:globalpaq_app/app/data/models/requests/dhl/dhl_post_guia_request.dart';
 import 'package:globalpaq_app/app/data/models/requests/dhl/dhl_post_recoleccion_request.dart';
-
 import 'package:globalpaq_app/app/data/models/responses/dhl/dhl_asignaciones_response.dart';
 import 'package:globalpaq_app/app/data/models/responses/dhl/dhl_cancela_response.dart';
 import 'package:globalpaq_app/app/data/models/responses/dhl/dhl_cobertura_response.dart';
@@ -13,7 +12,6 @@ import 'package:globalpaq_app/app/data/models/responses/dhl/dhl_historial_respon
 import 'package:globalpaq_app/app/data/models/responses/dhl/dhl_post_guia_response.dart';
 import 'package:globalpaq_app/app/data/models/responses/dhl/dhl_post_recoleccion_response.dart';
 import 'package:globalpaq_app/app/data/models/responses/dhl/dhl_tracking_response.dart';
-
 import 'package:globalpaq_app/app/data/repositories/local/local_authentication_repository.dart';
 
 class DhlAPI {
@@ -21,14 +19,14 @@ class DhlAPI {
   final LocalAuthRepository _localAuthRepository =
       Get.find<LocalAuthRepository>();
 
-  Future<DhlAsignacionesResponse> getAsignaciones() async {
+  Future<DhlAsignacionesResponse> getDhlAsignaciones() async {
     String session = await _localAuthRepository.session;
     var response = await _dio.get('/dhl/asignaciones',
         options: Options(headers: {"Authorization": session}));
     return DhlAsignacionesResponse.fromJson(response.data);
   }
 
-  Future<DhlHistorialResponse> getHistorial() async {
+  Future<DhlHistorialResponse> getDhlHistorial() async {
     String session = await _localAuthRepository.session;
     var response = await _dio.get('/dhl/historial',
         options: Options(headers: {"Authorization": session}));
@@ -36,7 +34,7 @@ class DhlAPI {
     return DhlHistorialResponse.fromJson(response.data);
   }
 
-  Future<DhlDisponiblesResponse> getDisponibles() async {
+  Future<DhlDisponiblesResponse> getDhlDisponibles() async {
     String session = await _localAuthRepository.session;
     var response = await _dio.get('/dhl/disponibles',
         options: Options(headers: {"Authorization": session}));
@@ -44,7 +42,7 @@ class DhlAPI {
     return DhlDisponiblesResponse.fromJson(response.data);
   }
 
-  Future<DhlGuiaTrackingResponse> getGuia(String tracking) async {
+  Future<DhlGuiaTrackingResponse> getDhlGuia(String tracking) async {
     String session = await _localAuthRepository.session;
     var response = await _dio.get('/dhl/guia/$tracking',
         options: Options(headers: {"Authorization": session}));
@@ -52,7 +50,7 @@ class DhlAPI {
     return DhlGuiaTrackingResponse.fromJson(response.data);
   }
 
-  Future<DhlTrackingResponse> getTracking(String tracking) async {
+  Future<DhlTrackingResponse> getDhlTracking(String tracking) async {
     String session = await _localAuthRepository.session;
     var response = await _dio.get('/dhl/cancelar/$tracking',
         options: Options(headers: {"Authorization": session}));
@@ -60,7 +58,7 @@ class DhlAPI {
     return DhlTrackingResponse.fromJson(response.data);
   }
 
-  Future<DhlCancelaResponse> cancela(String tracking) async {
+  Future<DhlCancelaResponse> cancelaDhl(String tracking) async {
     String session = await _localAuthRepository.session;
     var response = await _dio.get('/dhl/guia/$tracking',
         options: Options(headers: {"Authorization": session}));
@@ -68,7 +66,7 @@ class DhlAPI {
     return DhlCancelaResponse.fromJson(response.data);
   }
 
-  Future<DhlCpResponse> getCp(String cp) async {
+  Future<DhlCpResponse> getDhlCp(String cp) async {
     String session = await _localAuthRepository.session;
     var response = await _dio.get('/dhl/cp/$cp',
         options: Options(headers: {"Authorization": session}));
@@ -76,7 +74,7 @@ class DhlAPI {
     return DhlCpResponse.fromJson(response.data);
   }
 
-  Future<DhlCoberturaResponse> getCobertura(
+  Future<DhlCoberturaResponse> getDhlCobertura(
       String cpOrigen, String cpDestino) async {
     String session = await _localAuthRepository.session;
     var response = await _dio.get('/dhl/cobertura',
@@ -86,7 +84,7 @@ class DhlAPI {
     return DhlCoberturaResponse.fromJson(response.data);
   }
 
-  Future<DhlPostGuiaResponse> postGuia(DhlPostGuiaRequest guia) async {
+  Future<DhlPostGuiaResponse> postDhlGuia(DhlPostGuiaRequest guia) async {
     String session = await _localAuthRepository.session;
 
     var response = await _dio.post('/dhl/guia',
@@ -96,7 +94,7 @@ class DhlAPI {
     return DhlPostGuiaResponse.fromJson(response.data);
   }
 
-  Future<DhlRecoleccionResponse> postRecoleccion(
+  Future<DhlRecoleccionResponse> postDhlRecoleccion(
       DhlPostRecoleccionRequest recoleccion) async {
     String session = await _localAuthRepository.session;
 
