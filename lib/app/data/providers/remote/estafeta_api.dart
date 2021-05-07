@@ -41,7 +41,7 @@ class EstafetaAPI {
     return EstafetaDisponiblesResponse.fromJson(response.data);
   }
 
-  Future<EstafetaGuiaTrackingResponse> getEstafetapGuia(String tracking) async {
+  Future<EstafetaGuiaTrackingResponse> getEstafetaGuia(String tracking) async {
     String session = await this.getToken();
 
     var response = await _dio.get('/estafeta/guia/$tracking',
@@ -50,7 +50,7 @@ class EstafetaAPI {
     return EstafetaGuiaTrackingResponse.fromJson(response.data);
   }
 
-  Future<EstafetaCancelResponse> cancelaEstafetap(String tracking) async {
+  Future<EstafetaCancelResponse> cancelaEstafeta(String tracking) async {
     String session = await this.getToken();
 
     var response = await _dio.get('/estafeta/cancelar/$tracking',
@@ -59,7 +59,7 @@ class EstafetaAPI {
     return EstafetaCancelResponse.fromJson(response.data);
   }
 
-  Future<EstafetaCoberturaResponse> getEstafetapCobertura(
+  Future<EstafetaCoberturaResponse> getEstafetaCobertura(
       String cpOrigen, String cpDestino) async {
     String session = await _localAuthRepository.session;
 
@@ -70,7 +70,7 @@ class EstafetaAPI {
     return EstafetaCoberturaResponse.fromJson(response.data);
   }
 
-  Future<EstafetaPostGuiaResponse> postEstafetapGuia(
+  Future<EstafetaPostGuiaResponse> postEstafetaGuia(
       EstafetaPostGuiaRequest guia) async {
     String session = await _localAuthRepository.session;
     var response = await _dio.post('/estafeta/guia',
