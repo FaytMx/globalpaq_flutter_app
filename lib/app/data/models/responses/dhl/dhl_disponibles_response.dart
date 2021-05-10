@@ -1,31 +1,6 @@
 
-
 class DhlDisponiblesResponse {
     DhlDisponiblesResponse({
-        this.error,
-        this.status,
-        this.data,
-    });
-
-    final bool error;
-    final int status;
-    final List<DisponiblesDhl> data;
-
-    factory DhlDisponiblesResponse.fromJson(Map<String, dynamic> json) => DhlDisponiblesResponse(
-        error: json["error"],
-        status: json["status"],
-        data: List<DisponiblesDhl>.from(json["data"].map((x) => DisponiblesDhl.fromJson(x))),
-    );
-
-    Map<String, dynamic> toJson() => {
-        "error": error,
-        "status": status,
-        "data": List<dynamic>.from(data.map((x) => x.toJson())),
-    };
-}
-
-class DisponiblesDhl {
-    DisponiblesDhl({
         this.tipo,
         this.descripcion,
         this.peso,
@@ -45,7 +20,7 @@ class DisponiblesDhl {
     final bool activo;
     final String idarticulo;
 
-    factory DisponiblesDhl.fromJson(Map<String, dynamic> json) => DisponiblesDhl(
+    factory DhlDisponiblesResponse.fromJson(Map<String, dynamic> json) => DhlDisponiblesResponse(
         tipo: json["tipo"],
         descripcion: json["descripcion"],
         peso: json["peso"],

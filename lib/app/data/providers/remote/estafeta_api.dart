@@ -17,28 +17,52 @@ class EstafetaAPI {
 
   Future<String> getToken() async => _localAuthRepository.session;
 
-  Future<EstafetaAsignacionesResponse> getEstafetaAsignaciones() async {
+  Future<List<EstafetaAsignacionesResponse>> getEstafetaAsignaciones() async {
     String session = await this.getToken();
 
     var response = await _dio.get('/estafeta/asignaciones',
         options: Options(headers: {"Authorization": session}));
-    return EstafetaAsignacionesResponse.fromJson(response.data);
+
+    if (!(response.data["data"] is List)) {
+      print("👌");
+      throw new Exception("Token Invalido");
+    }
+
+    return (response.data['data'] as List)
+        .map((e) => EstafetaAsignacionesResponse.fromJson(e))
+        .toList();
   }
 
-  Future<EstafetaHistorialResponse> getEstafetaHistorial() async {
+  Future<List<EstafetaHistorialResponse>> getEstafetaHistorial() async {
     String session = await this.getToken();
 
     var response = await _dio.get('/estafeta/historial',
         options: Options(headers: {"Authorization": session}));
-    return EstafetaHistorialResponse.fromJson(response.data);
+
+    if (!(response.data["data"] is List)) {
+      print("👌");
+      throw new Exception("Token Invalido");
+    }
+
+    return (response.data['data'] as List)
+        .map((e) => EstafetaHistorialResponse.fromJson(e))
+        .toList();
   }
 
-  Future<EstafetaDisponiblesResponse> getEstafetaDisponibles() async {
+  Future<List<EstafetaDisponiblesResponse>> getEstafetaDisponibles() async {
     String session = await this.getToken();
 
     var response = await _dio.get('/estafeta/disponibles',
         options: Options(headers: {"Authorization": session}));
-    return EstafetaDisponiblesResponse.fromJson(response.data);
+
+    if (!(response.data["data"] is List)) {
+      print("👌");
+      throw new Exception("Token Invalido");
+    }
+
+    return (response.data['data'] as List)
+        .map((e) => EstafetaDisponiblesResponse.fromJson(e))
+        .toList();
   }
 
   Future<EstafetaGuiaTrackingResponse> getEstafetaGuia(String tracking) async {
@@ -70,13 +94,18 @@ class EstafetaAPI {
     return EstafetaCoberturaResponse.fromJson(response.data);
   }
 
-  Future<EstafetaPostGuiaResponse> postEstafetaGuia(
+  Future<EstafetaPostGuiaData> postEstafetaGuia(
       EstafetaPostGuiaRequest guia) async {
     String session = await _localAuthRepository.session;
     var response = await _dio.post('/estafeta/guia',
         options: Options(headers: {"Authorization": session}),
         data: guia.toMap());
 
-    return EstafetaPostGuiaResponse.fromJson(response.data);
+    if (response.data["data"] is List || response.data["data"] is String) {
+      print("👌");
+      throw new Exception(response.data["data"]);
+    }
+
+    return EstafetaPostGuiaData.fromJson(response.data["data"]);
   }
 }

@@ -19,27 +19,46 @@ class DhlAPI {
   final LocalAuthRepository _localAuthRepository =
       Get.find<LocalAuthRepository>();
 
-  Future<DhlAsignacionesResponse> getDhlAsignaciones() async {
+  Future<List<DhlAsignacionesResponse>> getDhlAsignaciones() async {
     String session = await _localAuthRepository.session;
     var response = await _dio.get('/dhl/asignaciones',
         options: Options(headers: {"Authorization": session}));
-    return DhlAsignacionesResponse.fromJson(response.data);
+
+    if (!(response.data["data"] is List)) {
+      print("👌");
+      throw new Exception("Token Invalido");
+    }
+    return (response.data['data'] as List)
+        .map((e) => DhlAsignacionesResponse.fromJson(e))
+        .toList();
   }
 
-  Future<DhlHistorialResponse> getDhlHistorial() async {
+  Future<List<DhlHistorialResponse>> getDhlHistorial() async {
     String session = await _localAuthRepository.session;
     var response = await _dio.get('/dhl/historial',
         options: Options(headers: {"Authorization": session}));
 
-    return DhlHistorialResponse.fromJson(response.data);
+    if (!(response.data["data"] is List)) {
+      print("👌");
+      throw new Exception("Token Invalido");
+    }
+    return (response.data['data'] as List)
+        .map((e) => DhlHistorialResponse.fromJson(e))
+        .toList();
   }
 
-  Future<DhlDisponiblesResponse> getDhlDisponibles() async {
+  Future<List<DhlDisponiblesResponse>> getDhlDisponibles() async {
     String session = await _localAuthRepository.session;
     var response = await _dio.get('/dhl/disponibles',
         options: Options(headers: {"Authorization": session}));
 
-    return DhlDisponiblesResponse.fromJson(response.data);
+    if (!(response.data["data"] is List)) {
+      print("👌");
+      throw new Exception("Token Invalido");
+    }
+    return (response.data['data'] as List)
+        .map((e) => DhlDisponiblesResponse.fromJson(e))
+        .toList();
   }
 
   Future<DhlGuiaTrackingResponse> getDhlGuia(String tracking) async {
@@ -84,14 +103,20 @@ class DhlAPI {
     return DhlCoberturaResponse.fromJson(response.data);
   }
 
-  Future<DhlPostGuiaResponse> postDhlGuia(DhlPostGuiaRequest guia) async {
+  Future<DhlPostGuiaData> postDhlGuia(DhlPostGuiaRequest guia) async {
     String session = await _localAuthRepository.session;
 
     var response = await _dio.post('/dhl/guia',
         options: Options(headers: {"Authorization": session}),
         data: guia.toMap());
 
-    return DhlPostGuiaResponse.fromJson(response.data);
+    if (response.data["data"] is List || response.data["data"] is String) {
+      print("👌");
+      throw new Exception(response.data["data"]);
+    }
+
+    return DhlPostGuiaData.fromJson(response.data["data"]);
+
   }
 
   Future<DhlRecoleccionResponse> postDhlRecoleccion(

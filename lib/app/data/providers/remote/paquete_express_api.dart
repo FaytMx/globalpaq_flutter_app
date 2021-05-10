@@ -18,28 +18,49 @@ class PaqueteExpressAPI {
 
   Future<String> getToken() async => _localAuthRepository.session;
 
-  Future<PaquetexpAsignacionesResponse> getPaquetexpAsignaciones() async {
+  Future<List<PaquetexpAsignacionesResponse>> getPaquetexpAsignaciones() async {
     String session = await this.getToken();
 
     var response = await _dio.get('/paquetexpress/asignaciones',
         options: Options(headers: {"Authorization": session}));
-    return PaquetexpAsignacionesResponse.fromJson(response.data);
+
+    if (!(response.data["data"] is List)) {
+      print("👌");
+      throw new Exception("Token Invalido");
+    }
+    return (response.data['data'] as List)
+        .map((e) => PaquetexpAsignacionesResponse.fromJson(e))
+        .toList();
   }
 
-  Future<PaquetexpHistorialResponse> getPaquetexpHistorial() async {
+  Future<List<PaquetexpHistorialResponse>> getPaquetexpHistorial() async {
     String session = await this.getToken();
 
     var response = await _dio.get('/paquetexpress/historial',
         options: Options(headers: {"Authorization": session}));
-    return PaquetexpHistorialResponse.fromJson(response.data);
+
+    if (!(response.data["data"] is List)) {
+      print("👌");
+      throw new Exception("Token Invalido");
+    }
+    return (response.data['data'] as List)
+        .map((e) => PaquetexpHistorialResponse.fromJson(e))
+        .toList();
   }
 
-  Future<PaquetexpDisponiblesResponse> getPaquetexpDisponibles() async {
+  Future<List<PaquetexpDisponiblesResponse>> getPaquetexpDisponibles() async {
     String session = await this.getToken();
 
     var response = await _dio.get('/paquetexpress/disponibles',
         options: Options(headers: {"Authorization": session}));
-    return PaquetexpDisponiblesResponse.fromJson(response.data);
+
+    if (!(response.data["data"] is List)) {
+      print("👌");
+      throw new Exception("Token Invalido");
+    }
+    return (response.data['data'] as List)
+        .map((e) => PaquetexpDisponiblesResponse.fromJson(e))
+        .toList();
   }
 
   Future<PaquetexpGuiaTrackingResponse> getPaquetexpGuia(
@@ -72,14 +93,19 @@ class PaqueteExpressAPI {
     return PaquetexpCoberturaResponse.fromJson(response.data);
   }
 
-  Future<PaquetexpPostGuiaResponse> postPaquetexpGuia(
+  Future<PaquetexpPostGuiaData> postPaquetexpGuia(
       PaquetexpPostGuiaRequest guia) async {
     String session = await _localAuthRepository.session;
     var response = await _dio.post('/paquetexpress/guia',
         options: Options(headers: {"Authorization": session}),
         data: guia.toMap());
 
-    return PaquetexpPostGuiaResponse.fromJson(response.data);
+    if (response.data["data"] is List || response.data["data"] is String) {
+      print("👌");
+      throw new Exception(response.data["data"]);
+    }
+
+    return PaquetexpPostGuiaData.fromJson(response.data);
   }
 
   Future postPaquetexpRecoleccion(

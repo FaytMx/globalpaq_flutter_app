@@ -15,13 +15,13 @@ import 'package:globalpaq_app/app/data/providers/remote/fedex_api.dart';
 class FedexRepository {
   FedexAPI _fedexApi = Get.find<FedexAPI>();
 
-  Future<FedexAsignacionesResponse> getFedexAsignaciones() =>
+  Future<List<FedexAsignacionesResponse>> getFedexAsignaciones() =>
       _fedexApi.getFedexAsignaciones();
 
-  Future<FedexHistorialResponse> getFedexHistorial() =>
+  Future<List<FedexHistorialResponse>> getFedexHistorial() =>
       _fedexApi.getFedexHistorial();
 
-  Future<FedexDisponiblesResponse> getFedexDisponibles() =>
+  Future<List<FedexDisponiblesResponse>> getFedexDisponibles() =>
       _fedexApi.getFedexDisponibles();
 
   Future<FedexGuiaTrackingResponse> getFedexGuia(String tracking) =>
@@ -36,7 +36,7 @@ class FedexRepository {
           String cpOrigen, String cpDestino) =>
       _fedexApi.getFedexCobertura(cpOrigen, cpDestino);
 
-  Future<FedexPostGuiaResponse> postFedexGuia(FedexPostGuiaRequest guia) =>
+  Future<FedexPostGuiaData> postFedexGuia(FedexPostGuiaRequest guia) =>
       _fedexApi.postFedexGuia(guia);
 
   Future<FedexRecoleccionResponse> postFedexRecoleccion(

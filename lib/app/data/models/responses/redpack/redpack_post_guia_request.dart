@@ -7,12 +7,12 @@ class RedpackPostGuiaResponse {
 
     final bool error;
     final int status;
-    final RedpackGuia data;
+    final RedpackPostGuiaData data;
 
     factory RedpackPostGuiaResponse.fromJson(Map<String, dynamic> json) => RedpackPostGuiaResponse(
         error: json["error"],
         status: json["status"],
-        data: RedpackGuia.fromJson(json["data"]),
+        data: RedpackPostGuiaData.fromJson(json["data"]),
     );
 
     Map<String, dynamic> toJson() => {
@@ -22,8 +22,8 @@ class RedpackPostGuiaResponse {
     };
 }
 
-class RedpackGuia {
-    RedpackGuia({
+class RedpackPostGuiaData {
+    RedpackPostGuiaData({
         this.tracking,
         this.label,
         this.seguro,
@@ -37,7 +37,7 @@ class RedpackGuia {
     final String recoleccion;
     final String message;
 
-    factory RedpackGuia.fromJson(Map<String, dynamic> json) => RedpackGuia(
+    factory RedpackPostGuiaData.fromJson(Map<String, dynamic> json) => RedpackPostGuiaData(
         tracking: json["tracking"],
         label: json["label"],
         seguro: json["seguro"],

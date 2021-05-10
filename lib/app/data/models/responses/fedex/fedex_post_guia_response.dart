@@ -7,12 +7,12 @@ class FedexPostGuiaResponse {
 
     final bool error;
     final int status;
-    final FedexGuia data;
+    final FedexPostGuiaData data;
 
     factory FedexPostGuiaResponse.fromJson(Map<String, dynamic> json) => FedexPostGuiaResponse(
         error: json["error"],
         status: json["status"],
-        data: FedexGuia.fromJson(json["data"]) ?? dynamic,
+        data: FedexPostGuiaData.fromJson(json["data"]),
     );
 
     Map<String, dynamic> toJson() => {
@@ -22,8 +22,8 @@ class FedexPostGuiaResponse {
     };
 }
 
-class FedexGuia {
-    FedexGuia({
+class FedexPostGuiaData {
+    FedexPostGuiaData({
         this.label,
         this.tracking,
     });
@@ -31,7 +31,7 @@ class FedexGuia {
     final String label;
     final String tracking;
 
-    factory FedexGuia.fromJson(Map<String, dynamic> json) => FedexGuia(
+    factory FedexPostGuiaData.fromJson(Map<String, dynamic> json) => FedexPostGuiaData(
         label: json["label"],
         tracking: json["tracking"],
     );

@@ -24,8 +24,8 @@ class DhlPostGuiaResponse {
     };
 }
 
-class GuiaDhl {
-    GuiaDhl({
+class DhlPostGuiaData {
+    DhlPostGuiaData({
         this.tracking,
         this.label,
     });
@@ -33,7 +33,7 @@ class GuiaDhl {
     final String tracking;
     final String label;
 
-    factory GuiaDhl.fromJson(Map<String, dynamic> json) => GuiaDhl(
+    factory DhlPostGuiaData.fromJson(Map<String, dynamic> json) => DhlPostGuiaData(
         tracking: json["tracking"],
         label: json["label"],
     );

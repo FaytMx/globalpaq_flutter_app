@@ -1,52 +1,35 @@
+// To parse this JSON data, do
+//
+//     final redpackDisponiblesResponse = redpackDisponiblesResponseFromJson(jsonString);
+
+import 'dart:convert';
+
+RedpackDisponiblesResponse redpackDisponiblesResponseFromJson(String str) => RedpackDisponiblesResponse.fromJson(json.decode(str));
+
+String redpackDisponiblesResponseToJson(RedpackDisponiblesResponse data) => json.encode(data.toJson());
+
 class RedpackDisponiblesResponse {
-  RedpackDisponiblesResponse({
-    this.error,
-    this.status,
-    this.data,
-  });
+    RedpackDisponiblesResponse({
+        this.tipo,
+        this.descripcion,
+        this.peso,
+        this.usadas,
+        this.disponibles,
+        this.total,
+        this.activo,
+        this.idarticulo,
+    });
 
-  final bool error;
-  final int status;
-  final List<RedpackDisponibles> data;
+    final String tipo;
+    final String descripcion;
+    final int peso;
+    final int usadas;
+    final int disponibles;
+    final int total;
+    final bool activo;
+    final String idarticulo;
 
-  factory RedpackDisponiblesResponse.fromJson(Map<String, dynamic> json) =>
-      RedpackDisponiblesResponse(
-        error: json["error"],
-        status: json["status"],
-        data: List<RedpackDisponibles>.from(
-            json["data"].map((x) => RedpackDisponibles.fromJson(x))),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "error": error,
-        "status": status,
-        "data": List<dynamic>.from(data.map((x) => x.toJson())),
-      };
-}
-
-class RedpackDisponibles {
-  RedpackDisponibles({
-    this.tipo,
-    this.descripcion,
-    this.peso,
-    this.usadas,
-    this.disponibles,
-    this.total,
-    this.activo,
-    this.idarticulo,
-  });
-
-  final String tipo;
-  final String descripcion;
-  final int peso;
-  final int usadas;
-  final int disponibles;
-  final int total;
-  final bool activo;
-  final String idarticulo;
-
-  factory RedpackDisponibles.fromJson(Map<String, dynamic> json) =>
-      RedpackDisponibles(
+    factory RedpackDisponiblesResponse.fromJson(Map<String, dynamic> json) => RedpackDisponiblesResponse(
         tipo: json["tipo"],
         descripcion: json["descripcion"],
         peso: json["peso"],
@@ -55,9 +38,9 @@ class RedpackDisponibles {
         total: json["total"],
         activo: json["activo"],
         idarticulo: json["idarticulo"],
-      );
+    );
 
-  Map<String, dynamic> toJson() => {
+    Map<String, dynamic> toJson() => {
         "tipo": tipo,
         "descripcion": descripcion,
         "peso": peso,
@@ -66,5 +49,5 @@ class RedpackDisponibles {
         "total": total,
         "activo": activo,
         "idarticulo": idarticulo,
-      };
+    };
 }

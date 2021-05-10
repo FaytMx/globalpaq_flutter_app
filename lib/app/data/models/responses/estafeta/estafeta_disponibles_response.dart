@@ -1,52 +1,35 @@
+// To parse this JSON data, do
+//
+//     final estafetaDisponiblesResponse = estafetaDisponiblesResponseFromJson(jsonString);
+
+import 'dart:convert';
+
+EstafetaDisponiblesResponse estafetaDisponiblesResponseFromJson(String str) => EstafetaDisponiblesResponse.fromJson(json.decode(str));
+
+String estafetaDisponiblesResponseToJson(EstafetaDisponiblesResponse data) => json.encode(data.toJson());
+
 class EstafetaDisponiblesResponse {
-  EstafetaDisponiblesResponse({
-    this.error,
-    this.status,
-    this.data,
-  });
+    EstafetaDisponiblesResponse({
+        this.tipo,
+        this.descripcion,
+        this.peso,
+        this.usadas,
+        this.disponibles,
+        this.total,
+        this.activo,
+        this.idarticulo,
+    });
 
-  final bool error;
-  final int status;
-  final List<EstafetaDisponibles> data;
+    final String tipo;
+    final String descripcion;
+    final int peso;
+    final int usadas;
+    final int disponibles;
+    final int total;
+    final bool activo;
+    final String idarticulo;
 
-  factory EstafetaDisponiblesResponse.fromJson(Map<String, dynamic> json) =>
-      EstafetaDisponiblesResponse(
-        error: json["error"],
-        status: json["status"],
-        data: List<EstafetaDisponibles>.from(
-            json["data"].map((x) => EstafetaDisponibles.fromJson(x))),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "error": error,
-        "status": status,
-        "data": List<dynamic>.from(data.map((x) => x.toJson())),
-      };
-}
-
-class EstafetaDisponibles {
-  EstafetaDisponibles({
-    this.tipo,
-    this.descripcion,
-    this.peso,
-    this.usadas,
-    this.disponibles,
-    this.total,
-    this.activo,
-    this.idarticulo,
-  });
-
-  final String tipo;
-  final String descripcion;
-  final int peso;
-  final int usadas;
-  final int disponibles;
-  final int total;
-  final bool activo;
-  final String idarticulo;
-
-  factory EstafetaDisponibles.fromJson(Map<String, dynamic> json) =>
-      EstafetaDisponibles(
+    factory EstafetaDisponiblesResponse.fromJson(Map<String, dynamic> json) => EstafetaDisponiblesResponse(
         tipo: json["tipo"],
         descripcion: json["descripcion"],
         peso: json["peso"],
@@ -55,9 +38,9 @@ class EstafetaDisponibles {
         total: json["total"],
         activo: json["activo"],
         idarticulo: json["idarticulo"],
-      );
+    );
 
-  Map<String, dynamic> toJson() => {
+    Map<String, dynamic> toJson() => {
         "tipo": tipo,
         "descripcion": descripcion,
         "peso": peso,
@@ -66,5 +49,5 @@ class EstafetaDisponibles {
         "total": total,
         "activo": activo,
         "idarticulo": idarticulo,
-      };
+    };
 }

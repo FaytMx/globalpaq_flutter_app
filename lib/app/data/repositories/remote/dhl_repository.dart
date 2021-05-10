@@ -16,12 +16,13 @@ import 'package:globalpaq_app/app/data/providers/remote/dhl_api.dart';
 class DhlRepository {
   final DhlAPI _dhlAPI = Get.find<DhlAPI>();
 
-  Future<DhlAsignacionesResponse> getAsignaciones() =>
+  Future<List<DhlAsignacionesResponse>> getAsignaciones() =>
       _dhlAPI.getDhlAsignaciones();
 
-  Future<DhlHistorialResponse> getHistorial() => _dhlAPI.getDhlHistorial();
+  Future<List<DhlHistorialResponse>> getHistorial() =>
+      _dhlAPI.getDhlHistorial();
 
-  Future<DhlDisponiblesResponse> getDisponibles() =>
+  Future<List<DhlDisponiblesResponse>> getDisponibles() =>
       _dhlAPI.getDhlDisponibles();
 
   Future<DhlGuiaTrackingResponse> getGuia(String tracking) =>
@@ -39,7 +40,7 @@ class DhlRepository {
           String cpOrigen, String cpDestino) =>
       _dhlAPI.getDhlCobertura(cpOrigen, cpDestino);
 
-  Future<DhlPostGuiaResponse> postGuia(DhlPostGuiaRequest guia) =>
+  Future<DhlPostGuiaData> postGuia(DhlPostGuiaRequest guia) =>
       _dhlAPI.postDhlGuia(guia);
 
   Future<DhlRecoleccionResponse> postRecoleccion(

@@ -22,8 +22,8 @@ class PaquetexpPostGuiaResponse {
     };
 }
 
-class PaquetexpPostGuia {
-    PaquetexpPostGuia({
+class PaquetexpPostGuiaData {
+    PaquetexpPostGuiaData({
         this.tracking,
         this.label,
     });
@@ -31,7 +31,7 @@ class PaquetexpPostGuia {
     final String tracking;
     final String label;
 
-    factory PaquetexpPostGuia.fromJson(Map<String, dynamic> json) => PaquetexpPostGuia(
+    factory PaquetexpPostGuiaData.fromJson(Map<String, dynamic> json) => PaquetexpPostGuiaData(
         tracking: json["tracking"],
         label: json["label"],
     );

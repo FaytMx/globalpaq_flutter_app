@@ -1,64 +1,33 @@
 class DhlHistorialResponse {
-  DhlHistorialResponse({
-    this.error,
-    this.status,
-    this.total,
-    this.data,
-  });
+    DhlHistorialResponse({
+        this.fecha,
+        this.tracking,
+        this.nombrer,
+        this.nombred,
+        this.tipoguia,
+        this.pesoguia,
+        this.rutapdf,
+        this.usuario,
+        this.statusenvio,
+        this.idtipoguia,
+        this.pesoDhl,
+        this.lastEvent,
+    });
 
-  final bool error;
-  final int status;
-  final String total;
-  final List<HistorialDhl> data;
+    final DateTime fecha;
+    final String tracking;
+    final String nombrer;
+    final String nombred;
+    final String tipoguia;
+    final String pesoguia;
+    final String rutapdf;
+    final dynamic usuario;
+    final String statusenvio;
+    final String idtipoguia;
+    final String pesoDhl;
+    final dynamic lastEvent;
 
-  factory DhlHistorialResponse.fromJson(Map<String, dynamic> json) =>
-      DhlHistorialResponse(
-        error: json["error"],
-        status: json["status"],
-        total: json["total"],
-        data: List<HistorialDhl>.from(
-            json["data"].map((x) => HistorialDhl.fromJson(x))),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "error": error,
-        "status": status,
-        "total": total,
-        "data": List<dynamic>.from(data.map((x) => x.toJson())),
-      };
-}
-
-class HistorialDhl {
-  HistorialDhl(
-      {this.fecha,
-      this.tracking,
-      this.nombrer,
-      this.nombred,
-      this.tipoguia,
-      this.pesoguia,
-      this.rutapdf,
-      this.usuario,
-      this.statusenvio,
-      this.idtipoguia,
-      this.pesoDhl,
-      this.lastEvent,
-      this.message});
-
-  final DateTime fecha;
-  final String tracking;
-  final String nombrer;
-  final String nombred;
-  final String tipoguia;
-  final String pesoguia;
-  final String rutapdf;
-  final dynamic usuario;
-  final String statusenvio;
-  final String idtipoguia;
-  final String pesoDhl;
-  final dynamic lastEvent;
-  final String message;
-
-  factory HistorialDhl.fromJson(Map<String, dynamic> json) => HistorialDhl(
+    factory DhlHistorialResponse.fromJson(Map<String, dynamic> json) => DhlHistorialResponse(
         fecha: DateTime.parse(json["fecha"]),
         tracking: json["tracking"],
         nombrer: json["nombrer"],
@@ -71,10 +40,9 @@ class HistorialDhl {
         idtipoguia: json["idtipoguia"],
         pesoDhl: json["peso_dhl"],
         lastEvent: json["last_event"],
-        message: json["message"],
-      );
+    );
 
-  Map<String, dynamic> toJson() => {
+    Map<String, dynamic> toJson() => {
         "fecha": fecha.toIso8601String(),
         "tracking": tracking,
         "nombrer": nombrer,
@@ -87,6 +55,5 @@ class HistorialDhl {
         "idtipoguia": idtipoguia,
         "peso_dhl": pesoDhl,
         "last_event": lastEvent,
-        "message": message
-      };
+    };
 }

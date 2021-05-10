@@ -1,106 +1,76 @@
+
 class FedexHistorialResponse {
-  FedexHistorialResponse({
-    this.error,
-    this.status,
-    this.total,
-    this.data,
-  });
+    FedexHistorialResponse({
+        this.fecha,
+        this.tracking,
+        this.nombrer,
+        this.nombred,
+        this.tipoguia,
+        this.pesoguia,
+        this.filename,
+        this.idusuario,
+        this.statusenvio,
+        this.fechastatus,
+        this.comentario,
+        this.idtipoguia,
+        this.lastEvent,
+        this.pesoFedex,
+        this.largoFedex,
+        this.anchoFedex,
+        this.altoFedex,
+        this.unidad,
+        this.diferencia,
+        this.correcionDireccion,
+        this.cargoValorDeclarado,
+        this.entregaExtendida,
+        this.recoleccionSabado,
+        this.paqueteExtragrande,
+        this.recoleccionExtendida,
+        this.devolucionPospago,
+        this.embarquePesado,
+        this.cpRemitente,
+        this.cpDestinatario,
+        this.zona,
+        this.idventa,
+        this.valordeclarado,
+        this.guiasHijo,
+    });
 
-  final bool error;
-  final int status;
-  final String total;
-  final List<HistorialFedex> data;
+    final DateTime fecha;
+    final String tracking;
+    final String nombrer;
+    final String nombred;
+    final String tipoguia;
+    final String pesoguia;
+    final String filename;
+    final dynamic idusuario;
+    final String statusenvio;
+    final DateTime fechastatus;
+    final String comentario;
+    final String idtipoguia;
+    final dynamic lastEvent;
+    final dynamic pesoFedex;
+    final dynamic largoFedex;
+    final dynamic anchoFedex;
+    final dynamic altoFedex;
+    final dynamic unidad;
+    final dynamic diferencia;
+    final dynamic correcionDireccion;
+    final dynamic cargoValorDeclarado;
+    final dynamic entregaExtendida;
+    final dynamic recoleccionSabado;
+    final dynamic paqueteExtragrande;
+    final dynamic recoleccionExtendida;
+    final dynamic devolucionPospago;
+    final dynamic embarquePesado;
+    final String cpRemitente;
+    final String cpDestinatario;
+    final dynamic zona;
+    final dynamic idventa;
+    final String valordeclarado;
+    final dynamic guiasHijo;
 
-  factory FedexHistorialResponse.fromJson(Map<String, dynamic> json) =>
-      FedexHistorialResponse(
-        error: json["error"],
-        status: json["status"],
-        total: json["total"],
-        data: List<HistorialFedex>.from(
-            json["data"].map((x) => HistorialFedex.fromJson(x))),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "error": error,
-        "status": status,
-        "total": total,
-        "data": List<dynamic>.from(data.map((x) => x.toJson())),
-      };
-}
-
-class HistorialFedex {
-  HistorialFedex(
-      {this.fecha,
-      this.tracking,
-      this.nombrer,
-      this.nombred,
-      this.tipoguia,
-      this.pesoguia,
-      this.filename,
-      this.idusuario,
-      this.statusenvio,
-      this.fechastatus,
-      this.comentario,
-      this.idtipoguia,
-      this.lastEvent,
-      this.pesoFedex,
-      this.largoFedex,
-      this.anchoFedex,
-      this.altoFedex,
-      this.unidad,
-      this.diferencia,
-      this.correcionDireccion,
-      this.cargoValorDeclarado,
-      this.entregaExtendida,
-      this.recoleccionSabado,
-      this.paqueteExtragrande,
-      this.recoleccionExtendida,
-      this.devolucionPospago,
-      this.embarquePesado,
-      this.cpRemitente,
-      this.cpDestinatario,
-      this.zona,
-      this.idventa,
-      this.valordeclarado,
-      this.guiasHijo,
-      this.message});
-
-  final DateTime fecha;
-  final String tracking;
-  final String nombrer;
-  final String nombred;
-  final String tipoguia;
-  final String pesoguia;
-  final String filename;
-  final dynamic idusuario;
-  final String statusenvio;
-  final DateTime fechastatus;
-  final String comentario;
-  final String idtipoguia;
-  final String lastEvent;
-  final String pesoFedex;
-  final String largoFedex;
-  final String anchoFedex;
-  final String altoFedex;
-  final String unidad;
-  final String diferencia;
-  final dynamic correcionDireccion;
-  final dynamic cargoValorDeclarado;
-  final dynamic entregaExtendida;
-  final dynamic recoleccionSabado;
-  final dynamic paqueteExtragrande;
-  final dynamic recoleccionExtendida;
-  final dynamic devolucionPospago;
-  final dynamic embarquePesado;
-  final String cpRemitente;
-  final String cpDestinatario;
-  final dynamic zona;
-  final dynamic idventa;
-  final String valordeclarado;
-  final dynamic guiasHijo;
-  final String message;
-
-  factory HistorialFedex.fromJson(Map<String, dynamic> json) => HistorialFedex(
+    factory FedexHistorialResponse.fromJson(Map<String, dynamic> json) => FedexHistorialResponse(
         fecha: DateTime.parse(json["fecha"]),
         tracking: json["tracking"],
         nombrer: json["nombrer"],
@@ -134,10 +104,9 @@ class HistorialFedex {
         idventa: json["idventa"],
         valordeclarado: json["valordeclarado"],
         guiasHijo: json["guias_hijo"],
-        message: json["message"],
-      );
+    );
 
-  Map<String, dynamic> toJson() => {
+    Map<String, dynamic> toJson() => {
         "fecha": fecha.toIso8601String(),
         "tracking": tracking,
         "nombrer": nombrer,
@@ -171,6 +140,5 @@ class HistorialFedex {
         "idventa": idventa,
         "valordeclarado": valordeclarado,
         "guias_hijo": guiasHijo,
-        "message": message
-      };
+    };
 }

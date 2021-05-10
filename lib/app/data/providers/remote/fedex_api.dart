@@ -20,28 +20,49 @@ class FedexAPI {
 
   Future<String> getToken() async => _localAuthRepository.session;
 
-  Future<FedexAsignacionesResponse> getFedexAsignaciones() async {
+  Future<List<FedexAsignacionesResponse>> getFedexAsignaciones() async {
     String session = await this.getToken();
 
     var response = await _dio.get('/fedex/asignaciones',
         options: Options(headers: {"Authorization": session}));
-    return FedexAsignacionesResponse.fromJson(response.data);
+
+    if (!(response.data["data"] is List)) {
+      print("👌");
+      throw new Exception("Token Invalido");
+    }
+    return (response.data['data'] as List)
+        .map((e) => FedexAsignacionesResponse.fromJson(e))
+        .toList();
   }
 
-  Future<FedexHistorialResponse> getFedexHistorial() async {
+  Future<List<FedexHistorialResponse>> getFedexHistorial() async {
     String session = await this.getToken();
 
     var response = await _dio.get('/fedex/historial',
         options: Options(headers: {"Authorization": session}));
-    return FedexHistorialResponse.fromJson(response.data);
+
+    if (!(response.data["data"] is List)) {
+      print("👌");
+      throw new Exception("Token Invalido");
+    }
+    return (response.data['data'] as List)
+        .map((e) => FedexHistorialResponse.fromJson(e))
+        .toList();
   }
 
-  Future<FedexDisponiblesResponse> getFedexDisponibles() async {
+  Future<List<FedexDisponiblesResponse>> getFedexDisponibles() async {
     String session = await this.getToken();
 
     var response = await _dio.get('/fedex/disponibles',
         options: Options(headers: {"Authorization": session}));
-    return FedexDisponiblesResponse.fromJson(response.data);
+
+    if (!(response.data["data"] is List)) {
+      print("👌");
+      throw new Exception("Token Invalido");
+    }
+    return (response.data['data'] as List)
+        .map((e) => FedexDisponiblesResponse.fromJson(e))
+        .toList();
   }
 
   Future<FedexGuiaTrackingResponse> getFedexGuia(String tracking) async {
@@ -82,13 +103,18 @@ class FedexAPI {
     return FedexCoberturaResponse.fromJson(response.data);
   }
 
-  Future<FedexPostGuiaResponse> postFedexGuia(FedexPostGuiaRequest guia) async {
+  Future<FedexPostGuiaData> postFedexGuia(FedexPostGuiaRequest guia) async {
     String session = await _localAuthRepository.session;
     var response = await _dio.post('/fedex/guia',
         options: Options(headers: {"Authorization": session}),
         data: guia.toMap());
 
-    return FedexPostGuiaResponse.fromJson(response.data);
+    if (response.data["data"] is List || response.data["data"] is String) {
+      print("👌");
+      throw new Exception(response.data["data"]);
+    }
+
+    return FedexPostGuiaData.fromJson(response.data["data"]);
   }
 
   Future<FedexRecoleccionResponse> postFedexRecoleccion(

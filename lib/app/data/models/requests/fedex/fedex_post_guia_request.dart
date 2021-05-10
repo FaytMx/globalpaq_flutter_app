@@ -24,7 +24,7 @@ class FedexPostGuiaRequest {
   final int packageLineItemAlto;
   final String packageLineItemValor;
 
-  FedexPostGuiaRequest(
+  FedexPostGuiaRequest({
     this.guiaTipo,
     this.guiaPeso,
     this.guiaRec,
@@ -49,7 +49,7 @@ class FedexPostGuiaRequest {
     this.packageLineItemAncho,
     this.packageLineItemAlto,
     this.packageLineItemValor,
-  );
+  });
 
   Map<String, dynamic> toMap() {
     return {

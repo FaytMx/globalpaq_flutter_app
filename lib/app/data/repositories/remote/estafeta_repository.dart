@@ -12,13 +12,13 @@ import 'package:globalpaq_app/app/data/providers/remote/estafeta_api.dart';
 class EstafetaRepository {
   final EstafetaAPI _estafetaAPI = Get.find<EstafetaAPI>();
 
-  Future<EstafetaAsignacionesResponse> getEstafetaAsignaciones() =>
+  Future<List<EstafetaAsignacionesResponse>> getEstafetaAsignaciones() =>
       _estafetaAPI.getEstafetaAsignaciones();
 
-  Future<EstafetaHistorialResponse> getEstafetaHistorial() =>
+  Future<List<EstafetaHistorialResponse>> getEstafetaHistorial() =>
       _estafetaAPI.getEstafetaHistorial();
 
-  Future<EstafetaDisponiblesResponse> getEstafetaDisponibles() =>
+  Future<List<EstafetaDisponiblesResponse>> getEstafetaDisponibles() =>
       _estafetaAPI.getEstafetaDisponibles();
 
   Future<EstafetaGuiaTrackingResponse> getEstafetapGuia(String tracking) =>
@@ -31,7 +31,7 @@ class EstafetaRepository {
           String cpOrigen, String cpDestino) =>
       _estafetaAPI.getEstafetaCobertura(cpOrigen, cpDestino);
 
-  Future<EstafetaPostGuiaResponse> postEstafetaGuia(
+  Future<EstafetaPostGuiaData> postEstafetaGuia(
           EstafetaPostGuiaRequest guia) =>
       _estafetaAPI.postEstafetaGuia(guia);
 }

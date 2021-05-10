@@ -13,13 +13,13 @@ import 'package:globalpaq_app/app/data/providers/remote/paquete_express_api.dart
 class PaquetexpRepository {
   final PaqueteExpressAPI _paqueteExpressAPI = Get.find<PaqueteExpressAPI>();
 
-  Future<PaquetexpAsignacionesResponse> getPaquetexpAsignaciones() =>
+  Future<List<PaquetexpAsignacionesResponse>> getPaquetexpAsignaciones() =>
       _paqueteExpressAPI.getPaquetexpAsignaciones();
 
-  Future<PaquetexpHistorialResponse> getPaquetexpHistorial() =>
+  Future<List<PaquetexpHistorialResponse>> getPaquetexpHistorial() =>
       _paqueteExpressAPI.getPaquetexpHistorial();
 
-  Future<PaquetexpDisponiblesResponse> getPaquetexpDisponibles() =>
+  Future<List<PaquetexpDisponiblesResponse>> getPaquetexpDisponibles() =>
       _paqueteExpressAPI.getPaquetexpDisponibles();
 
   Future<PaquetexpGuiaTrackingResponse> getPaquetexpGuia(String tracking) =>
@@ -32,7 +32,7 @@ class PaquetexpRepository {
           String cpOrigen, String cpDestino) =>
       _paqueteExpressAPI.getPaquetexpCobertura(cpOrigen, cpDestino);
 
-  Future<PaquetexpPostGuiaResponse> postPaquetexpGuia(
+  Future<PaquetexpPostGuiaData> postPaquetexpGuia(
           PaquetexpPostGuiaRequest guia) =>
       _paqueteExpressAPI.postPaquetexpGuia(guia);
 

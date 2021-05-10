@@ -1,42 +1,20 @@
+import 'dart:convert';
+
+FedexAsignacionesResponse fedexAsignacionesResponseFromJson(String str) =>
+    FedexAsignacionesResponse.fromJson(json.decode(str));
+
+String fedexAsignacionesResponseToJson(FedexAsignacionesResponse data) =>
+    json.encode(data.toJson());
+
 class FedexAsignacionesResponse {
   FedexAsignacionesResponse({
-    this.error,
-    this.status,
-    this.total,
-    this.data,
+    this.fecha,
+    this.idtipoguia,
+    this.descripcion,
+    this.cantidad,
+    this.peso,
+    this.venta,
   });
-
-  final bool error;
-  final int status;
-  final String total;
-  final List<AsignacionesFedex> data;
-
-  factory FedexAsignacionesResponse.fromJson(Map<String, dynamic> json) =>
-      FedexAsignacionesResponse(
-        error: json["error"],
-        status: json["status"],
-        total: json["total"],
-        data: List<AsignacionesFedex>.from(
-            json["data"].map((x) => AsignacionesFedex.fromJson(x))),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "error": error,
-        "status": status,
-        "total": total,
-        "data": List<dynamic>.from(data.map((x) => x.toJson())),
-      };
-}
-
-class AsignacionesFedex {
-  AsignacionesFedex(
-      {this.fecha,
-      this.idtipoguia,
-      this.descripcion,
-      this.cantidad,
-      this.peso,
-      this.venta,
-      this.message});
 
   final DateTime fecha;
   final String idtipoguia;
@@ -44,17 +22,15 @@ class AsignacionesFedex {
   final String cantidad;
   final String peso;
   final String venta;
-  final String message;
 
-  factory AsignacionesFedex.fromJson(Map<String, dynamic> json) =>
-      AsignacionesFedex(
+  factory FedexAsignacionesResponse.fromJson(Map<String, dynamic> json) =>
+      FedexAsignacionesResponse(
         fecha: DateTime.parse(json["fecha"]),
         idtipoguia: json["idtipoguia"],
         descripcion: json["descripcion"],
         cantidad: json["cantidad"],
         peso: json["peso"],
         venta: json["venta"],
-        message: json["message"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -64,6 +40,5 @@ class AsignacionesFedex {
         "cantidad": cantidad,
         "peso": peso,
         "venta": venta,
-        "message": message
       };
 }

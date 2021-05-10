@@ -14,13 +14,13 @@ import 'package:globalpaq_app/app/data/providers/remote/redpack_api.dart';
 class RedpackRepository {
   final RedpackAPI _redpackAPI = Get.find<RedpackAPI>();
 
-  Future<RedpackAsignacionesResponse> getRedpackAsignaciones() =>
+  Future<List<RedpackAsignacionesResponse>> getRedpackAsignaciones() =>
       _redpackAPI.getRedpackAsignaciones();
 
-  Future<RedpackHistorialResponse> getRedpackHistorial() =>
+  Future<List<RedpackHistorialResponse>> getRedpackHistorial() =>
       _redpackAPI.getRedpackHistorial();
 
-  Future<RedpackDisponiblesResponse> getRedpackDisponibles() =>
+  Future<List<RedpackDisponiblesResponse>> getRedpackDisponibles() =>
       _redpackAPI.getRedpackDisponibles();
 
   Future<RedpackGuiaTrackingResponse> getRedpackGuia(String tracking) =>
@@ -33,7 +33,7 @@ class RedpackRepository {
           String cpOrigen, String cpDestino) =>
       _redpackAPI.getRedpackCobertura(cpOrigen, cpDestino);
 
-  Future<RedpackPostGuiaResponse> postFedexGuia(RedpackPostGuiaRequest guia) =>
+  Future<RedpackPostGuiaData> postFedexGuia(RedpackPostGuiaRequest guia) =>
       _redpackAPI.postFedexGuia(guia);
 
   Future<RedpackRecoleccionResponse> postRedpackRecoleccion(

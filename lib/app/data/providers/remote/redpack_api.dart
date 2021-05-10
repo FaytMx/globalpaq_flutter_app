@@ -19,28 +19,49 @@ class RedpackAPI {
 
   Future<String> getToken() async => _localAuthRepository.session;
 
-  Future<RedpackAsignacionesResponse> getRedpackAsignaciones() async {
+  Future<List<RedpackAsignacionesResponse>> getRedpackAsignaciones() async {
     String session = await this.getToken();
 
     var response = await _dio.get('/redpack/asignaciones',
         options: Options(headers: {"Authorization": session}));
-    return RedpackAsignacionesResponse.fromJson(response.data);
+
+    if (!(response.data["data"] is List)) {
+      print("👌");
+      throw new Exception("Token Invalido");
+    }
+    return (response.data['data'] as List)
+        .map((e) => RedpackAsignacionesResponse.fromJson(e))
+        .toList();
   }
 
-  Future<RedpackHistorialResponse> getRedpackHistorial() async {
+  Future<List<RedpackHistorialResponse>> getRedpackHistorial() async {
     String session = await this.getToken();
 
     var response = await _dio.get('/redpack/historial',
         options: Options(headers: {"Authorization": session}));
-    return RedpackHistorialResponse.fromJson(response.data);
+
+    if (!(response.data["data"] is List)) {
+      print("👌");
+      throw new Exception("Token Invalido");
+    }
+    return (response.data['data'] as List)
+        .map((e) => RedpackHistorialResponse.fromJson(e))
+        .toList();
   }
 
-  Future<RedpackDisponiblesResponse> getRedpackDisponibles() async {
+  Future<List<RedpackDisponiblesResponse>> getRedpackDisponibles() async {
     String session = await this.getToken();
 
     var response = await _dio.get('/redpack/disponibles',
         options: Options(headers: {"Authorization": session}));
-    return RedpackDisponiblesResponse.fromJson(response.data);
+
+    if (!(response.data["data"] is List)) {
+      print("👌");
+      throw new Exception("Token Invalido");
+    }
+    return (response.data['data'] as List)
+        .map((e) => RedpackDisponiblesResponse.fromJson(e))
+        .toList();
   }
 
   Future<RedpackGuiaTrackingResponse> getRedpackGuia(String tracking) async {
@@ -72,14 +93,18 @@ class RedpackAPI {
     return RedpackCoberturaResponse.fromJson(response.data);
   }
 
-  Future<RedpackPostGuiaResponse> postFedexGuia(
-      RedpackPostGuiaRequest guia) async {
+  Future<RedpackPostGuiaData> postFedexGuia(RedpackPostGuiaRequest guia) async {
     String session = await _localAuthRepository.session;
     var response = await _dio.post('/redpack/guia',
         options: Options(headers: {"Authorization": session}),
         data: guia.toMap());
 
-    return RedpackPostGuiaResponse.fromJson(response.data);
+    if (response.data["data"] is List || response.data["data"] is String) {
+      print("👌");
+      throw new Exception(response.data["data"]);
+    }
+
+    return RedpackPostGuiaData.fromJson(response.data["data"]);
   }
 
   Future<RedpackRecoleccionResponse> postRedpackRecoleccion(

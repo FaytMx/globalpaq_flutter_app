@@ -7,12 +7,12 @@ class EstafetaPostGuiaResponse {
 
     final bool error;
     final int status;
-    final  EstafetaPost data;
+    final  EstafetaPostGuiaData data;
 
     factory EstafetaPostGuiaResponse.fromJson(Map<String, dynamic> json) => EstafetaPostGuiaResponse(
         error: json["error"],
         status: json["status"],
-        data:  EstafetaPost.fromJson(json["data"]),
+        data:  EstafetaPostGuiaData.fromJson(json["data"]),
     );
 
     Map<String, dynamic> toJson() => {
@@ -22,8 +22,8 @@ class EstafetaPostGuiaResponse {
     };
 }
 
-class  EstafetaPost {
-     EstafetaPost({
+class  EstafetaPostGuiaData {
+     EstafetaPostGuiaData({
         this.tracking,
         this.label,
     });
@@ -31,7 +31,7 @@ class  EstafetaPost {
     final String tracking;
     final String label;
 
-    factory  EstafetaPost.fromJson(Map<String, dynamic> json) =>  EstafetaPost(
+    factory  EstafetaPostGuiaData.fromJson(Map<String, dynamic> json) =>  EstafetaPostGuiaData(
         tracking: json["tracking"],
         label: json["label"],
     );

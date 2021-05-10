@@ -1,33 +1,15 @@
+// To parse this JSON data, do
+//
+//     final paquetexpHistorialResponse = paquetexpHistorialResponseFromJson(jsonString);
+
+import 'dart:convert';
+
+PaquetexpHistorialResponse paquetexpHistorialResponseFromJson(String str) => PaquetexpHistorialResponse.fromJson(json.decode(str));
+
+String paquetexpHistorialResponseToJson(PaquetexpHistorialResponse data) => json.encode(data.toJson());
+
 class PaquetexpHistorialResponse {
     PaquetexpHistorialResponse({
-        this.error,
-        this.status,
-        this.total,
-        this.data,
-    });
-
-    final bool error;
-    final int status;
-    final String total;
-    final List<PaquetexpHistorial> data;
-
-    factory PaquetexpHistorialResponse.fromJson(Map<String, dynamic> json) => PaquetexpHistorialResponse(
-        error: json["error"],
-        status: json["status"],
-        total: json["total"],
-        data: List<PaquetexpHistorial>.from(json["data"].map((x) => PaquetexpHistorial.fromJson(x))),
-    );
-
-    Map<String, dynamic> toJson() => {
-        "error": error,
-        "status": status,
-        "total": total,
-        "data": List<dynamic>.from(data.map((x) => x.toJson())),
-    };
-}
-
-class PaquetexpHistorial {
-    PaquetexpHistorial({
         this.fecha,
         this.tracking,
         this.nombrer,
@@ -51,7 +33,7 @@ class PaquetexpHistorial {
     final String statusenvio;
     final String idtipoguia;
 
-    factory PaquetexpHistorial.fromJson(Map<String, dynamic> json) => PaquetexpHistorial(
+    factory PaquetexpHistorialResponse.fromJson(Map<String, dynamic> json) => PaquetexpHistorialResponse(
         fecha: DateTime.parse(json["fecha"]),
         tracking: json["tracking"],
         nombrer: json["nombrer"],
