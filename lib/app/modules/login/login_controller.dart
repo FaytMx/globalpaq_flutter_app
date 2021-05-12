@@ -15,10 +15,13 @@ class LoginController extends GetxController {
   String _correo = '', _password = '';
 
   void onCorreoChanged(String text) {
+    print("🚲 $text");
     _correo = text;
   }
 
   void onPasswordChanged(String text) {
+    print("🎍 $text");
+
     _password = text;
   }
 

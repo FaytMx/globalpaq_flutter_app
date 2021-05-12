@@ -1,12 +1,14 @@
 import 'package:get/get.dart';
 import 'package:globalpaq_app/app/data/models/requests/fedex/fedex_post_guia_request.dart';
 import 'package:globalpaq_app/app/data/models/responses/asociado_info_response.dart';
+import 'package:globalpaq_app/app/data/repositories/local/local_authentication_repository.dart';
 import 'package:globalpaq_app/app/data/repositories/remote/asociado_repository.dart';
 import 'package:globalpaq_app/app/data/repositories/remote/dhl_repository.dart';
 import 'package:globalpaq_app/app/data/repositories/remote/estafeta_repository.dart';
 import 'package:globalpaq_app/app/data/repositories/remote/fedex_repository.dart';
 import 'package:globalpaq_app/app/data/repositories/remote/paquetexp_repository.dart';
 import 'package:globalpaq_app/app/data/repositories/remote/redpack_repository.dart';
+import 'package:globalpaq_app/app/routes/app_routes.dart';
 
 class HomeController extends GetxController {
   final AsociadoRepository _asociadoRepository = Get.find<AsociadoRepository>();
@@ -17,24 +19,32 @@ class HomeController extends GetxController {
   final PaquetexpRepository _paquetexpRepository =
       Get.find<PaquetexpRepository>();
 
+  final LocalAuthRepository _localAuthRepository =
+      Get.find<LocalAuthRepository>();
+
   DataAsociado _asociado = new DataAsociado();
   DataAsociado get asociado => _asociado;
 
   @override
   void onReady() {
     super.onReady();
-    _fedexTest();
+    _init();
   }
 
   Future<void> _init() async {
     try {
       var response = await _asociadoRepository.getAsociadoInfo();
-      // await Future.delayed(Duration(seconds: 5));
+      await Future.delayed(Duration(seconds: 5));
       _asociado = response.data;
       update();
     } catch (e) {
       print(e);
     }
+  }
+
+  Future<void> logout() {
+    _localAuthRepository.clearSession();
+    Get.offAllNamed(AppRoutes.SPLASH);
   }
 
   Future<void> _fedexTest() async {
@@ -67,7 +77,6 @@ class HomeController extends GetxController {
       // var datos = await _fedexRepository.postFedexGuia(guia);
       // print(datos);
 
-      
     } catch (e) {
       print(e);
     }

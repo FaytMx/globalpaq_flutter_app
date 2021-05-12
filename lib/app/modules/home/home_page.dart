@@ -6,10 +6,22 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(builder: (_) {
-
+      if (_.asociado.idasociado == null) {
+        return Scaffold(
+          
+          body: Center(
+            child: CircularProgressIndicator(),
+          ),
+        );
+      }
       return Scaffold(
+        appBar: AppBar(
+            actions: [
+              IconButton(icon: Icon(Icons.exit_to_app), onPressed: _.logout)
+            ],
+          ),
         body: Center(
-          child: Text(""),
+          child: Text("${_.asociado.idasociado}"),
         ),
       );
     });
