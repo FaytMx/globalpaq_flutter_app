@@ -1,29 +1,44 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'dart:math' as math;
 
-class Responsive {
-  double _width, _height, _diagonal;
-  bool _isTablet;
+class Responsive extends StatelessWidget {
+  final Widget mobile;
+  final Widget tablet;
+  final Widget desktop;
 
-  double get width => _width;
-  double get height => _height;
-  double get diagonal => _diagonal;
-  bool get isTablet => _isTablet;
+  const Responsive({
+    Key key,
+    @required this.mobile,
+    this.tablet,
+    @required this.desktop,
+  }) : super(key: key);
 
-  static Responsive of(BuildContext context) => Responsive(context);
+// This size work fine on my design, maybe you need some customization depends on your design
 
-  Responsive(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
-    this._width = size.width;
-    this._height = size.height;
+  // This isMobile, isTablet, isDesktop helep us later
+  static bool isMobile(BuildContext context) =>
+      MediaQuery.of(context).size.width < 850;
 
-    this._diagonal = math.sqrt(math.pow(_width, 2) + math.pow(_height, 2));
+  static bool isTablet(BuildContext context) =>
+      MediaQuery.of(context).size.width < 1100 &&
+      MediaQuery.of(context).size.width >= 850;
 
-    this._isTablet= size.shortestSide >= 600;
+  static bool isDesktop(BuildContext context) =>
+      MediaQuery.of(context).size.width >= 1100;
+
+  @override
+  Widget build(BuildContext context) {
+    final Size _size = MediaQuery.of(context).size;
+    // If our width is more than 1100 then we consider it a desktop
+    if (_size.width >= 1100) {
+      return desktop;
+    }
+    // If width it less then 1100 and more then 850 we consider it as tablet
+    else if (_size.width >= 850 && tablet != null) {
+      return tablet;
+    }
+    // Or less then that we called it mobile
+    else {
+      return mobile;
+    }
   }
-
-  double wp(double percent) => _width * percent / 100;
-  double hp(double percent) => _height * percent / 100;
-  double dp(double percent) => _diagonal * percent / 100;
 }
