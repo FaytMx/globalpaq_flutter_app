@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:globalpaq_app/app/data/models/requests/fedex/fedex_post_guia_request.dart';
 import 'package:globalpaq_app/app/data/models/responses/asociado_info_response.dart';
@@ -11,6 +12,10 @@ import 'package:globalpaq_app/app/data/repositories/remote/redpack_repository.da
 import 'package:globalpaq_app/app/routes/app_routes.dart';
 
 class HomeController extends GetxController {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  GlobalKey<ScaffoldState> get scaffoldKey => _scaffoldKey;
+
   final AsociadoRepository _asociadoRepository = Get.find<AsociadoRepository>();
   final FedexRepository _fedexRepository = Get.find<FedexRepository>();
   final DhlRepository _dhlRepository = Get.find<DhlRepository>();
@@ -79,6 +84,12 @@ class HomeController extends GetxController {
 
     } catch (e) {
       print(e);
+    }
+  }
+
+  void controlMenu() {
+    if (!_scaffoldKey.currentState.isDrawerOpen) {
+      _scaffoldKey.currentState.openDrawer();
     }
   }
 }

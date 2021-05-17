@@ -19,6 +19,8 @@ import 'package:globalpaq_app/app/data/repositories/remote/paquetexp_repository.
 import 'package:globalpaq_app/app/data/repositories/remote/redpack_repository.dart';
 
 class DependencyInjection {
+  
+
   static void init() {
     Get.lazyPut<FlutterSecureStorage>(() => FlutterSecureStorage(),
         fenix: true);
@@ -48,4 +50,6 @@ class DependencyInjection {
     Get.lazyPut(() => RedpackRepository(), fenix: true);
     Get.lazyPut(() => PaquetexpRepository(), fenix: true);
   }
+
+  
 }

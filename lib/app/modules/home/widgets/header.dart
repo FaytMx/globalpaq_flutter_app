@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:globalpaq_app/app/modules/home/home_controller.dart';
 import 'package:globalpaq_app/app/utils/constatnts.dart';
+import 'package:globalpaq_app/app/utils/responsive.dart';
 
 class Header extends StatelessWidget {
   const Header({
@@ -9,20 +12,26 @@ class Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Text(
-          "Dashboard",
-          style: Theme.of(context).textTheme.headline6,
-        ),
-        Spacer(
-          flex: 2,
-        ),
-        Expanded(
-          child: SearchField(),
-        ),
-        ProfileContainer(),
-      ],
+    return GetBuilder<HomeController>(
+      builder: (_) => Row(
+        children: [
+          if (!Responsive.isDesktop(context))
+            IconButton(icon: Icon(Icons.menu), onPressed: _.controlMenu),
+          if (!Responsive.isMobile(context))
+            Text(
+              "Dashboard",
+              style: Theme.of(context).textTheme.headline6,
+            ),
+          if (!Responsive.isMobile(context))
+            Spacer(
+              flex: Responsive.isDesktop(context) ? 2 : 1,
+            ),
+          Expanded(
+            child: SearchField(),
+          ),
+          ProfileContainer(),
+        ],
+      ),
     );
   }
 }
@@ -50,10 +59,12 @@ class ProfileContainer extends StatelessWidget {
             "assets/images/profile_pic.png",
             height: 38,
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
-            child: Text("Angiie Santolla"),
-          ),
+          if (!Responsive.isMobile(context))
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
+              child: Text("Angiie Santolla"),
+            ),
           Icon(Icons.keyboard_arrow_down),
         ],
       ),
