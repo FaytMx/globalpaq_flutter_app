@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:globalpaq_app/app/modules/tienda/tienda_controller.dart';
+import 'package:globalpaq_app/app/modules/misguias/mis_guias_controller.dart';
 
-class TiendaPage extends StatelessWidget {
+class MisGuiasPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<TiendaController>(
+    return GetBuilder<MisGuiasController>(
       builder: (_) => Scaffold(
         body: Center(
-          child: Text("Tienda Page"),
+          child: Text("MisGuias Page"),
         ),
       ),
     );

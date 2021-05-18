@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:globalpaq_app/app/modules/home/home_controller.dart';
+import 'package:globalpaq_app/app/routes/app_routes.dart';
 
 class SideMenu extends StatelessWidget {
   const SideMenu({
@@ -22,57 +25,79 @@ class SideMenu extends StatelessWidget {
             DrawerListTile(
               title: "Dashbord",
               svgSrc: "assets/icons/menu_dashbord.svg",
-              press: () {},
+              press: () {
+                Get.toNamed(AppRoutes.HOME);
+              },
             ),
             DrawerListTile(
               title: "Mis Guías",
               svgSrc: "assets/icons/label.svg",
-              press: () {},
+              press: () {
+                Get.toNamed(AppRoutes.MIS_GUIAS);
+              },
             ),
             DrawerListTile(
               title: "Movimientos",
               svgSrc: "assets/icons/acceleration.svg",
-              press: () {},
+              press: () {
+                Get.toNamed(AppRoutes.MOVIMIENTOS);
+              },
             ),
             DrawerListTile(
               title: "Pedidos",
               svgSrc: "assets/icons/cart.svg",
-              press: () {},
+              press: () {
+                Get.toNamed(AppRoutes.PEDIDOS);
+              },
             ),
             DrawerListTile(
               title: "Mis Envios",
               svgSrc: "assets/icons/delivery.svg",
-              press: () {},
+              press: () {
+                Get.toNamed(AppRoutes.ENVIOS);
+              },
             ),
             DrawerListTile(
               title: "Recolecciones",
               svgSrc: "assets/icons/package.svg",
-              press: () {},
+              press: () {
+                Get.toNamed(AppRoutes.RECOLECCIONES);
+              },
             ),
             DrawerListTile(
               title: "Tienda",
               svgSrc: "assets/icons/shopping-cart.svg",
-              press: () {},
+              press: () {
+                Get.toNamed(AppRoutes.TIENDA);
+              },
             ),
             DrawerListTile(
               title: "Cobertura",
               svgSrc: "assets/icons/telegram.svg",
-              press: () {},
+              press: () {
+                Get.toNamed(AppRoutes.COBERTURA);
+              },
             ),
             DrawerListTile(
               title: "Cotizador seguro",
               svgSrc: "assets/icons/health-care.svg",
-              press: () {},
+              press: () {
+                Get.toNamed(AppRoutes.SEGURO);
+              },
             ),
             DrawerListTile(
               title: "Aclaraciones y reclamos",
               svgSrc: "assets/icons/menu_setting.svg",
-              press: () {},
+              press: () {
+                Get.toNamed(AppRoutes.ACLARACIONES);
+              },
             ),
             DrawerListTile(
               title: "Cerrar Sesion",
               svgSrc: "assets/icons/menu_setting.svg",
-              press: () {},
+              press: () {
+                Get.find<HomeController>().logout();
+              },
             ),
           ],
         ),

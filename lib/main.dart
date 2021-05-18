@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Globalpaq APP',
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: bgColor,
         textTheme: GoogleFonts.poppinsTextTheme(
