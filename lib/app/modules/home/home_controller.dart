@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:globalpaq_app/app/data/models/requests/fedex/fedex_post_guia_request.dart';
+import 'package:globalpaq_app/app/data/models/guias_disponibles_chart._model.dart';
 import 'package:globalpaq_app/app/data/models/responses/asociado_info_response.dart';
+import 'package:globalpaq_app/app/data/models/responses/dhl/dhl_disponibles_response.dart';
+import 'package:globalpaq_app/app/data/models/responses/estafeta/estafeta_disponibles_response.dart';
+import 'package:globalpaq_app/app/data/models/responses/fedex/fedex_disponibles_response.dart';
+import 'package:globalpaq_app/app/data/models/responses/paquetexp/paquetexp_disponibles_response.dart';
+import 'package:globalpaq_app/app/data/models/responses/redpack/redpack_disponibles_response.dart';
 import 'package:globalpaq_app/app/data/repositories/local/local_authentication_repository.dart';
 import 'package:globalpaq_app/app/data/repositories/remote/asociado_repository.dart';
 import 'package:globalpaq_app/app/data/repositories/remote/dhl_repository.dart';
@@ -30,6 +35,10 @@ class HomeController extends GetxController {
   DataAsociado _asociado = new DataAsociado();
   DataAsociado get asociado => _asociado;
 
+  List<GuiasDisponiblesChartModel> _datosDisponibles = [];
+
+  List<GuiasDisponiblesChartModel> get datosDisponibles => _datosDisponibles;
+
   @override
   void onReady() {
     super.onReady();
@@ -39,8 +48,10 @@ class HomeController extends GetxController {
   Future<void> _init() async {
     try {
       var response = await _asociadoRepository.getAsociadoInfo();
+      var datos = await this.getDisponiblesPaqueterias();
       await Future.delayed(Duration(seconds: 5));
       _asociado = response.data;
+      _datosDisponibles = datos;
       update();
     } catch (e) {
       print(e);
@@ -50,6 +61,53 @@ class HomeController extends GetxController {
   Future<void> logout() {
     _localAuthRepository.clearSession();
     Get.offAllNamed(AppRoutes.SPLASH);
+  }
+
+  Future<List<GuiasDisponiblesChartModel>> getDisponiblesPaqueterias() async {
+    List<GuiasDisponiblesChartModel> datos = [];
+
+    List<FedexDisponiblesResponse> fedexDisponibles =
+        await _fedexRepository.getFedexDisponibles();
+    List<DhlDisponiblesResponse> dhlDisponibles =
+        await _dhlRepository.getDisponibles();
+    List<EstafetaDisponiblesResponse> estafetaDisponibles =
+        await _estafetaRepository.getEstafetaDisponibles();
+    List<RedpackDisponiblesResponse> redpackDisponibles =
+        await _redpackRepository.getRedpackDisponibles();
+    List<PaquetexpDisponiblesResponse> paquetexpDisponibles =
+        await _paquetexpRepository.getPaquetexpDisponibles();
+
+    var fedexChart = this.getDisponiblesChart(fedexDisponibles, "Fedex");
+    var dhlChart = this.getDisponiblesChart(dhlDisponibles, "DHL");
+    var estafetaChart =
+        this.getDisponiblesChart(estafetaDisponibles, "Estafeta");
+    var redpackChart = this.getDisponiblesChart(redpackDisponibles, "Redpack");
+    var paquetexpChart =
+        this.getDisponiblesChart(paquetexpDisponibles, "Paquetexpress");
+
+    datos.add(fedexChart);
+    datos.add(dhlChart);
+    datos.add(estafetaChart);
+    datos.add(redpackChart);
+    datos.add(paquetexpChart);
+
+    return datos;
+  }
+
+  GuiasDisponiblesChartModel getDisponiblesChart(
+      List guias, String paqueteria) {
+    var myChart = new GuiasDisponiblesChartModel();
+    guias.forEach((guia) {
+      if (guia.activo != false && guia.disponibles > 0) {
+        myChart.total += guia.total;
+        myChart.usadas += guia.usadas;
+        myChart.disponible += guia.disponibles;
+      }
+    });
+    myChart.paqueteria = paqueteria;
+    myChart.porcentaje = ((myChart.usadas * 100) / myChart.total).toDouble();
+
+    return myChart;
   }
 
   Future<void> _fedexTest() async {

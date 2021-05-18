@@ -13,7 +13,11 @@ class SideMenu extends StatelessWidget {
         child: Column(
           children: [
             DrawerHeader(
-              child: Image.asset("assets/images/globalpaq_logo_cuadrito.png"),
+              child: Image.asset(
+                "assets/images/globalpaq_logo_cuadrito.png",
+                height: 100,
+                width: 100,
+              ),
             ),
             DrawerListTile(
               title: "Dashbord",
@@ -21,37 +25,52 @@ class SideMenu extends StatelessWidget {
               press: () {},
             ),
             DrawerListTile(
-              title: "Transaction",
-              svgSrc: "assets/icons/menu_tran.svg",
+              title: "Mis Guías",
+              svgSrc: "assets/icons/label.svg",
               press: () {},
             ),
             DrawerListTile(
-              title: "Task",
-              svgSrc: "assets/icons/menu_task.svg",
+              title: "Movimientos",
+              svgSrc: "assets/icons/acceleration.svg",
               press: () {},
             ),
             DrawerListTile(
-              title: "Documents",
-              svgSrc: "assets/icons/menu_doc.svg",
+              title: "Pedidos",
+              svgSrc: "assets/icons/cart.svg",
               press: () {},
             ),
             DrawerListTile(
-              title: "Store",
-              svgSrc: "assets/icons/menu_store.svg",
+              title: "Mis Envios",
+              svgSrc: "assets/icons/delivery.svg",
               press: () {},
             ),
             DrawerListTile(
-              title: "Notification",
-              svgSrc: "assets/icons/menu_notification.svg",
+              title: "Recolecciones",
+              svgSrc: "assets/icons/package.svg",
               press: () {},
             ),
             DrawerListTile(
-              title: "Profile",
-              svgSrc: "assets/icons/menu_profile.svg",
+              title: "Tienda",
+              svgSrc: "assets/icons/shopping-cart.svg",
               press: () {},
             ),
             DrawerListTile(
-              title: "Settings",
+              title: "Cobertura",
+              svgSrc: "assets/icons/telegram.svg",
+              press: () {},
+            ),
+            DrawerListTile(
+              title: "Cotizador seguro",
+              svgSrc: "assets/icons/health-care.svg",
+              press: () {},
+            ),
+            DrawerListTile(
+              title: "Aclaraciones y reclamos",
+              svgSrc: "assets/icons/menu_setting.svg",
+              press: () {},
+            ),
+            DrawerListTile(
+              title: "Cerrar Sesion",
               svgSrc: "assets/icons/menu_setting.svg",
               press: () {},
             ),
@@ -61,7 +80,6 @@ class SideMenu extends StatelessWidget {
     );
   }
 }
-
 
 class DrawerListTile extends StatelessWidget {
   final String title, svgSrc;
@@ -91,4 +109,3 @@ class DrawerListTile extends StatelessWidget {
     );
   }
 }
-

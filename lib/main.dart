@@ -28,8 +28,8 @@ class MyApp extends StatelessWidget {
             Theme.of(context).textTheme.apply(bodyColor: Colors.white)),
         canvasColor: secondaryColor,
       ),
-      home: HomePage(),
-      initialBinding: HomeBindings(),
+      home: SplashPage(),
+      initialBinding: SplashBinding(),
       getPages: AppPage.pages,
     );
   }
