@@ -15,6 +15,7 @@ import 'package:globalpaq_app/app/data/repositories/remote/fedex_repository.dart
 import 'package:globalpaq_app/app/data/repositories/remote/paquetexp_repository.dart';
 import 'package:globalpaq_app/app/data/repositories/remote/redpack_repository.dart';
 import 'package:globalpaq_app/app/routes/app_routes.dart';
+import 'package:globalpaq_app/app/utils/constatnts.dart';
 
 class HomeController extends GetxController {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -77,13 +78,15 @@ class HomeController extends GetxController {
     List<PaquetexpDisponiblesResponse> paquetexpDisponibles =
         await _paquetexpRepository.getPaquetexpDisponibles();
 
-    var fedexChart = this.getDisponiblesChart(fedexDisponibles, "Fedex");
-    var dhlChart = this.getDisponiblesChart(dhlDisponibles, "DHL");
-    var estafetaChart =
-        this.getDisponiblesChart(estafetaDisponibles, "Estafeta");
-    var redpackChart = this.getDisponiblesChart(redpackDisponibles, "Redpack");
-    var paquetexpChart =
-        this.getDisponiblesChart(paquetexpDisponibles, "Paquetexpress");
+    var fedexChart =
+        this.getDisponiblesChart(fedexDisponibles, "Fedex", fedexColor);
+    var dhlChart = this.getDisponiblesChart(dhlDisponibles, "DHL", dhlColor);
+    var estafetaChart = this
+        .getDisponiblesChart(estafetaDisponibles, "Estafeta", estafetaColor);
+    var redpackChart =
+        this.getDisponiblesChart(redpackDisponibles, "Redpack", redpackColor);
+    var paquetexpChart = this.getDisponiblesChart(
+        paquetexpDisponibles, "Paquetexpress", paquetexpressColor);
 
     datos.add(fedexChart);
     datos.add(dhlChart);
@@ -95,7 +98,10 @@ class HomeController extends GetxController {
   }
 
   GuiasDisponiblesChartModel getDisponiblesChart(
-      List guias, String paqueteria) {
+    List guias,
+    String paqueteria,
+    Color color,
+  ) {
     var myChart = new GuiasDisponiblesChartModel();
     guias.forEach((guia) {
       if (guia.activo != false && guia.disponibles > 0) {
@@ -106,6 +112,7 @@ class HomeController extends GetxController {
     });
     myChart.paqueteria = paqueteria;
     myChart.porcentaje = ((myChart.usadas * 100) / myChart.total).toDouble();
+    myChart.color = color;
 
     return myChart;
   }

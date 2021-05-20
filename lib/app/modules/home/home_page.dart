@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:globalpaq_app/app/modules/home/home_controller.dart';
 import 'package:globalpaq_app/app/modules/home/widgets/dashboard_screen.dart';
-import 'package:globalpaq_app/app/modules/home/widgets/side_menu.dart';
+import 'package:globalpaq_app/app/widgets/side_menu.dart';
 import 'package:globalpaq_app/app/utils/responsive.dart';
 
 class HomePage extends StatelessWidget {

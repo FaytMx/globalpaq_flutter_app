@@ -24,13 +24,13 @@ class GuiasDisponiblesChart extends StatelessWidget {
               startDegreeOffset: -90,
               sections: [
                 PieChartSectionData(
-                  color: primaryColor,
+                  color: info.color,
                   value: info.porcentaje,
                   showTitle: false,
                   radius: 16,
                 ),
                 PieChartSectionData(
-                  color: primaryColor.withOpacity(0.1),
+                  color: info.color.withOpacity(0.1),
                   value: 100-info.porcentaje,
                   showTitle: false,
                   radius: 13,

@@ -5,5 +5,6 @@ class MisGuiasBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut(() => MisGuiasController());
+    
   }
 }
