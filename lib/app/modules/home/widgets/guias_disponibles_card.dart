@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:globalpaq_app/app/data/models/guias_disponibles_chart._model.dart';
 import 'package:globalpaq_app/app/modules/home/widgets/guias_disponibles_chart.dart';
+import 'package:globalpaq_app/app/routes/app_routes.dart';
 import 'package:globalpaq_app/app/utils/constatnts.dart';
 
 class GuiasDisponiblesCard extends StatelessWidget {
@@ -13,22 +15,27 @@ class GuiasDisponiblesCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(defaultPadding),
-      decoration: BoxDecoration(
-        color: secondaryColor,
-        borderRadius: const BorderRadius.all(
-          Radius.circular(10),
+    return GestureDetector(
+      onTap: (){
+        Get.toNamed(AppRoutes.MIS_GUIAS, arguments: info.paqueteria);
+      },
+      child: Container(
+        padding: EdgeInsets.all(defaultPadding),
+        decoration: BoxDecoration(
+          color: secondaryColor,
+          borderRadius: const BorderRadius.all(
+            Radius.circular(10),
+          ),
         ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(info.paqueteria),
-          GuiasDisponiblesChart(info:info),
-          
-        ],
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(info.paqueteria),
+            GuiasDisponiblesChart(info:info),
+            
+          ],
+        ),
       ),
     );
   }

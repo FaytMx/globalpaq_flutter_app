@@ -6,6 +6,8 @@ import 'package:globalpaq_app/app/utils/responsive.dart';
 import 'package:globalpaq_app/app/widgets/side_menu.dart';
 
 class MisGuiasPage extends StatelessWidget {
+  
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<MisGuiasController>(builder: (_) {

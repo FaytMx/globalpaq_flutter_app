@@ -22,6 +22,7 @@ class MisGuiasController extends GetxController {
       Get.find<PaquetexpRepository>();
 
   var _disponibles = [];
+  String _paqueteriaSel = "";
 
   final List<String> _paqueterias = [
     "Fedex",
@@ -34,8 +35,15 @@ class MisGuiasController extends GetxController {
   List<String> get paqueterias => _paqueterias;
 
   get disponibles => _disponibles;
+  get paqueteriaSel => _paqueteriaSel;
 
   GlobalKey<ScaffoldState> get scaffoldKey => _scaffoldKey;
+
+  @override
+  void onInit() {
+    super.onInit();
+    getDisp(Get.arguments);
+  }
 
   void controlMenu() {
     if (!_scaffoldKey.currentState.isDrawerOpen) {

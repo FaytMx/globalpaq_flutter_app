@@ -3,6 +3,7 @@ import 'package:globalpaq_app/app/modules/home/widgets/header.dart';
 import 'package:globalpaq_app/app/modules/home/widgets/my_fiels.dart';
 import 'package:globalpaq_app/app/modules/home/widgets/recent_files.dart';
 import 'package:globalpaq_app/app/modules/home/widgets/storage_details.dart';
+import 'package:globalpaq_app/app/modules/home/widgets/user_details.dart';
 import 'package:globalpaq_app/app/utils/constatnts.dart';
 import 'package:globalpaq_app/app/utils/responsive.dart';
 
@@ -25,11 +26,14 @@ class DashboardScreen extends StatelessWidget {
                   flex: 5,
                   child: Column(
                     children: [
+                      UserDetails(),
+                      SizedBox(
+                        height: defaultPadding,
+                      ),
                       MyFiels(),
                       SizedBox(
                         height: defaultPadding,
                       ),
-                      RecentFiles(),
                       if (Responsive.isMobile(context))
                         SizedBox(
                           height: defaultPadding,

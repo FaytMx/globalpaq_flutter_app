@@ -14,6 +14,7 @@ class Header extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<MisGuiasController>(
       builder: (_) => Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           if (!Responsive.isDesktop(context))
             IconButton(icon: Icon(Icons.menu), onPressed: _.controlMenu),
@@ -22,10 +23,13 @@ class Header extends StatelessWidget {
               "Dashboard",
               style: Theme.of(context).textTheme.headline6,
             ),
-          if (!Responsive.isMobile(context))
-            Spacer(
-              flex: Responsive.isDesktop(context) ? 2 : 1,
-            )
+          // if (!Responsive.isMobile(context))
+          //   Spacer(
+          //     flex: Responsive.isDesktop(context) ? 2 : 1,
+          //   ),
+            IconButton(icon: Icon(Icons.keyboard_arrow_left), onPressed: () {
+              _.getDisp("");
+            }),
         ],
       ),
     );
