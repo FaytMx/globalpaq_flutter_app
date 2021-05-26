@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:globalpaq_app/app/data/models/guias_disponibles.dart';
 import 'package:globalpaq_app/app/data/models/responses/dhl/dhl_disponibles_response.dart';
 import 'package:globalpaq_app/app/data/models/responses/estafeta/estafeta_disponibles_response.dart';
 import 'package:globalpaq_app/app/data/models/responses/fedex/fedex_disponibles_response.dart';
@@ -10,40 +11,8 @@ import 'package:globalpaq_app/app/data/repositories/remote/estafeta_repository.d
 import 'package:globalpaq_app/app/data/repositories/remote/fedex_repository.dart';
 import 'package:globalpaq_app/app/data/repositories/remote/paquetexp_repository.dart';
 import 'package:globalpaq_app/app/data/repositories/remote/redpack_repository.dart';
+import 'package:globalpaq_app/app/routes/app_routes.dart';
 
-class GuiasDisponibles {
-  final bool activo;
-  final String descripcion;
-  final int disponibles;
-  final int idarticulo;
-  final int peso;
-  final String tipo;
-  final int total;
-  final int usadas;
-
-  GuiasDisponibles({
-    this.activo,
-    this.descripcion,
-    this.disponibles,
-    this.idarticulo,
-    this.peso,
-    this.tipo,
-    this.total,
-    this.usadas,
-  });
-
-  factory GuiasDisponibles.fromJson(Map<String, dynamic> json) =>
-      GuiasDisponibles(
-        activo: json["fecha"],
-        descripcion: json["idtipoguia"],
-        disponibles: json["descripcion"],
-        idarticulo: json["cantidad"],
-        peso: json["peso"],
-        tipo: json["venta"],
-        total: json["venta"],
-        usadas: json["venta"],
-      );
-}
 
 class MisGuiasController extends GetxController {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -142,4 +111,9 @@ class MisGuiasController extends GetxController {
       return disponibles;
     }
   }
+
+  void goToGeneraGuia(GuiasDisponibles disponibles) {
+    Get.toNamed(AppRoutes.GENERA_GUIA, arguments: disponibles);
+  }
+
 }

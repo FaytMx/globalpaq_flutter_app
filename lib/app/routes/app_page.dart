@@ -5,6 +5,8 @@ import 'package:globalpaq_app/app/modules/cobertura/cobertura_binding.dart';
 import 'package:globalpaq_app/app/modules/cobertura/cobertura_page.dart';
 import 'package:globalpaq_app/app/modules/envios/envios_binding.dart';
 import 'package:globalpaq_app/app/modules/envios/envios_page.dart';
+import 'package:globalpaq_app/app/modules/generaguia/genera_guia_binding.dart';
+import 'package:globalpaq_app/app/modules/generaguia/genera_guia_page.dart';
 import 'package:globalpaq_app/app/modules/home/home_binding.dart';
 import 'package:globalpaq_app/app/modules/home/home_page.dart';
 import 'package:globalpaq_app/app/modules/login/login_binding.dart';
@@ -84,6 +86,11 @@ class AppPage {
       name: AppRoutes.ACLARACIONES,
       page: () => AclaracionesPage(),
       binding: AclaracionesBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.GENERA_GUIA,
+      page: () => GeneraGuiaPage(),
+      binding: GeneraGuiaBinding(),
     ),
   ];
 }

@@ -49,7 +49,7 @@ class MisGuiasScreen extends StatelessWidget {
                 );
               }
               return Container(
-                height: Get.height * 0.8,
+                height: Get.height * 0.79,
                 child: ListView.builder(
                   // shrinkWrap: true,
                   itemCount: _.disponibles.length,
@@ -120,7 +120,9 @@ Widget _guiaCard(dynamic disponible) {
               SizedBox(
                 width: 200,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.find<MisGuiasController>().goToGeneraGuia(disponible);
+                  },
                   child: Text('GENERAR'),
                 ),
               ),
