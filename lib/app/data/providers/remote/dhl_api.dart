@@ -115,8 +115,12 @@ class DhlAPI {
       throw new Exception(response.data["data"]);
     }
 
-    return DhlPostGuiaData.fromJson(response.data["data"]);
+    if (response.data["error"] == true || response.data["err"] == true) {
+      print("👌");
+      throw new Exception(response.data["data"]);
+    }
 
+    return DhlPostGuiaData.fromJson(response.data["data"]);
   }
 
   Future<DhlRecoleccionResponse> postDhlRecoleccion(

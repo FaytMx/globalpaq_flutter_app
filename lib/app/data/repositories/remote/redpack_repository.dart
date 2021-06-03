@@ -33,8 +33,8 @@ class RedpackRepository {
           String cpOrigen, String cpDestino) =>
       _redpackAPI.getRedpackCobertura(cpOrigen, cpDestino);
 
-  Future<RedpackPostGuiaData> postFedexGuia(RedpackPostGuiaRequest guia) =>
-      _redpackAPI.postFedexGuia(guia);
+  Future<RedpackPostGuiaData> postRedpackGuia(RedpackPostGuiaRequest guia) =>
+      _redpackAPI.postRedpackGuia(guia);
 
   Future<RedpackRecoleccionResponse> postRedpackRecoleccion(
           RedpackPostRecoleccionRequest recoleccion) =>

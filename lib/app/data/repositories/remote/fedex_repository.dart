@@ -30,7 +30,7 @@ class FedexRepository {
   Future<FedexCancelResponse> cancelaFedex(String tracking) =>
       _fedexApi.cancelaFedex(tracking);
 
-  Future<FedexCpResponse> getFedexCp(String cp) => _fedexApi.getFedexCp(cp);
+  Future<List<CpFedex>> getFedexCp(String cp) => _fedexApi.getFedexCp(cp);
 
   Future<FedexCoberturaResponse> getFedexCobertura(
           String cpOrigen, String cpDestino) =>

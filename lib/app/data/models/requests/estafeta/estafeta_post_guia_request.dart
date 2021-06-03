@@ -23,8 +23,9 @@ class EstafetaPostGuiaRequest {
   final int packageLineItemAncho;
   final int packageLineItemAlto;
   final String packageLineItemValor;
+  final String packageLineItemContenido;
 
-  EstafetaPostGuiaRequest(
+  EstafetaPostGuiaRequest({
     this.guiaTipo,
     this.guiaPeso,
     this.guiaRec,
@@ -49,7 +50,8 @@ class EstafetaPostGuiaRequest {
     this.packageLineItemAncho,
     this.packageLineItemAlto,
     this.packageLineItemValor,
-  );
+    this.packageLineItemContenido,
+  });
 
   Map<String, dynamic> toMap() {
     return {
@@ -77,6 +79,7 @@ class EstafetaPostGuiaRequest {
       "packageLineItem_largo": this.packageLineItemLargo,
       "packageLineItem_ancho": this.packageLineItemAncho,
       "packageLineItem_alto": this.packageLineItemAlto,
+      "packageLineItem_contenido": this.packageLineItemContenido,
     };
   }
 }

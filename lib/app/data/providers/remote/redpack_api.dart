@@ -93,13 +93,19 @@ class RedpackAPI {
     return RedpackCoberturaResponse.fromJson(response.data);
   }
 
-  Future<RedpackPostGuiaData> postFedexGuia(RedpackPostGuiaRequest guia) async {
+  Future<RedpackPostGuiaData> postRedpackGuia(
+      RedpackPostGuiaRequest guia) async {
     String session = await _localAuthRepository.session;
     var response = await _dio.post('/redpack/guia',
         options: Options(headers: {"Authorization": session}),
         data: guia.toMap());
 
     if (response.data["data"] is List || response.data["data"] is String) {
+      print("👌");
+      throw new Exception(response.data["data"]);
+    }
+
+    if (response.data["error"] == true || response.data["err"] == true) {
       print("👌");
       throw new Exception(response.data["data"]);
     }

@@ -27,9 +27,9 @@ class PaquetexpPostGuiaRequest {
   final String recipientNumExt;
   final String shipperEmail;
   final String recipientEmail;
-  final double packageLineItemValor;
+  final String packageLineItemValor;
 
-  PaquetexpPostGuiaRequest(
+  PaquetexpPostGuiaRequest({
     this.guiaTipo,
     this.guiaPeso,
     this.guiaRec,
@@ -59,7 +59,7 @@ class PaquetexpPostGuiaRequest {
     this.packageLineItemAlto,
     this.packageLineItemContenido,
     this.packageLineItemValor,
-  );
+  });
 
   Map<String, dynamic> toMap() {
     return {

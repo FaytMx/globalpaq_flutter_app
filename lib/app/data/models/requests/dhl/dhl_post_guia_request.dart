@@ -25,7 +25,7 @@ class DhlPostGuiaRequest {
   final String packageLineItemContenido;
 
   DhlPostGuiaRequest(
-      this.guiaTipo,
+      {this.guiaTipo,
       this.guiaPeso,
       this.guiaRec,
       this.shipperNombre,
@@ -48,7 +48,8 @@ class DhlPostGuiaRequest {
       this.packageLineItemLargo,
       this.packageLineItemAncho,
       this.packageLineItemAlto,
-      this.packageLineItemContenido);
+      this.packageLineItemContenido}
+      );
 
   Map<String, dynamic> toMap() {
     return {

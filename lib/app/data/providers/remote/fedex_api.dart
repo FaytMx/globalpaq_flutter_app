@@ -60,6 +60,7 @@ class FedexAPI {
       print("👌");
       throw new Exception("Token Invalido");
     }
+
     return (response.data['data'] as List)
         .map((e) => FedexDisponiblesResponse.fromJson(e))
         .toList();
@@ -83,13 +84,20 @@ class FedexAPI {
     return FedexCancelResponse.fromJson(response.data);
   }
 
-  Future<FedexCpResponse> getFedexCp(String cp) async {
+  Future<List<CpFedex>> getFedexCp(String cp) async {
     String session = await this.getToken();
 
     var response = await _dio.get('/fedex/cp/$cp',
         options: Options(headers: {"Authorization": session}));
 
-    return FedexCpResponse.fromJson(response.data);
+    if (!(response.data["data"] is List)) {
+      print("👌");
+      throw new Exception("Token Invalido");
+    }
+
+    return (response.data['data'] as List)
+        .map((e) => CpFedex.fromJson(e))
+        .toList();
   }
 
   Future<FedexCoberturaResponse> getFedexCobertura(
@@ -110,6 +118,11 @@ class FedexAPI {
         data: guia.toMap());
 
     if (response.data["data"] is List || response.data["data"] is String) {
+      print("👌");
+      throw new Exception(response.data["data"]);
+    }
+
+    if (response.data["error"] == true || response.data["err"] == true) {
       print("👌");
       throw new Exception(response.data["data"]);
     }

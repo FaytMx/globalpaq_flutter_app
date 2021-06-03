@@ -26,7 +26,7 @@ class RedpackPostGuiaRequest {
   final String shipperNumExt;
   final String recipientNumExt;
 
-  RedpackPostGuiaRequest(
+  RedpackPostGuiaRequest({
     this.guiaTipo,
     this.guiaPeso,
     this.guiaRec,
@@ -53,7 +53,7 @@ class RedpackPostGuiaRequest {
     this.packageLineItemAncho,
     this.packageLineItemAlto,
     this.packageLineItemContenido,
-  );
+  });
 
   Map<String, dynamic> toMap() {
     return {

@@ -106,6 +106,11 @@ class EstafetaAPI {
       throw new Exception(response.data["data"]);
     }
 
+    if (response.data["error"] == true || response.data["err"] == true) {
+      print("👌");
+      throw new Exception(response.data["data"]);
+    }
+
     return EstafetaPostGuiaData.fromJson(response.data["data"]);
   }
 }
