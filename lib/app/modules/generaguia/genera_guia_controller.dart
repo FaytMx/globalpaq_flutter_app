@@ -138,6 +138,14 @@ class DatosGuia {
   });
 }
 
+class ColoniaSugest {
+  List<String> colonias;
+  String ciudad;
+  String estado;
+
+  ColoniaSugest({this.colonias, this.ciudad = "", this.estado = ""}) { this.colonias = [];}
+}
+
 class GeneraGuiaController extends GetxController {
 //servicios
   final FedexRepository _fedexRepository = Get.find<FedexRepository>();
@@ -180,6 +188,12 @@ class GeneraGuiaController extends GetxController {
 
   String _estadoHint = "";
   String get estadoHint => _estadoHint;
+
+  ColoniaSugest _hintRem = new ColoniaSugest();
+  ColoniaSugest _hintDes = new ColoniaSugest();
+
+  ColoniaSugest get hintRem => _hintRem;
+  ColoniaSugest get hintDes => _hintDes;
 
 //ciclos de vida
   @override
@@ -438,18 +452,36 @@ class GeneraGuiaController extends GetxController {
   }
 
 //direcciones
-  void getDirs(String cp) {
-    _coloniasList.clear();
-    _ciudadHint = "";
-    _estadoHint = "";
+  void getDirs(String cp, int tipo) {
+
+    if (tipo == 1) {
+      _hintRem.colonias.clear();
+      _hintRem.ciudad = "";
+      _hintRem.estado = "";
+    } else if (tipo == 2) {
+      _hintDes.colonias.clear();
+      _hintDes.ciudad = "";
+      _hintDes.estado = "";
+    }
+print('entro');
     if (this._isFedex) {
       this._getDirFedex(cp).then((value) {
         if (value != null) {
           value.forEach((CpFedex cp) {
-            _coloniasList.add(cp.colonia);
+            (tipo == 1)
+                ? _hintRem.colonias.add(cp.colonia)
+                : _hintDes.colonias.add(cp.colonia);
+            // _coloniasList.add(cp.colonia);
           });
-          _ciudadHint = value[0].ciudad;
-          _estadoHint = value[0].aestado;
+          if (tipo == 1) {
+            _hintRem.ciudad = value[0].ciudad;
+            _hintRem.estado = value[0].aestado;
+          } else {
+            _hintDes.ciudad = value[0].ciudad;
+            _hintDes.estado = value[0].aestado;
+          }
+          // _ciudadHint = value[0].ciudad;
+          // _estadoHint = value[0].aestado;
           update();
         }
       });

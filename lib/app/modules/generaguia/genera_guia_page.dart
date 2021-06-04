@@ -106,12 +106,12 @@ class GeneraGuiaPage extends StatelessWidget {
                     textValue: _.datosGuias.shipperCp,
                     onChanged: (value) {
                       _.datosGuias.shipperCp = value;
-                      _.getDirs(value);
+                      _.getDirs(value,1);
                     },
                   ),
                   AutoCompleteColony(
                       keyCp: keyCpRemitente,
-                      coloniasList: _.coloniasList,
+                      coloniasList: _.hintRem.colonias,
                       onChanged: (value) {
                         _.datosGuias.shipperCalle2 = value;
                       }),
@@ -127,7 +127,7 @@ class GeneraGuiaPage extends StatelessWidget {
                     hintText: "Ciudad remitente",
                     labelText: "Ciudad",
                     suffixIcon: Icons.map_rounded,
-                    textValue: _.ciudadHint,
+                    textValue: _.hintRem.ciudad,
                     onChanged: (value) {
                       _.datosGuias.shipperCiudad = value;
                     },
@@ -136,7 +136,7 @@ class GeneraGuiaPage extends StatelessWidget {
                     hintText: "Estado remitente",
                     labelText: "Estado",
                     suffixIcon: Icons.terrain_rounded,
-                    textValue: _.estadoHint,
+                    textValue: _.hintRem.estado,
                     onChanged: (value) {
                       _.datosGuias.shipperEstado = value;
                     },
@@ -212,12 +212,12 @@ class GeneraGuiaPage extends StatelessWidget {
                     textValue: _.datosGuias.recipientCp,
                     onChanged: (value) {
                       _.datosGuias.recipientCp = value;
-                      _.getDirs(value);
+                      _.getDirs(value,2);
                     },
                   ),
                   AutoCompleteColony(
                       keyCp: keyCpDestinatario,
-                      coloniasList: _.coloniasList,
+                      coloniasList: _.hintDes.colonias,
                       onChanged: (value) {
                         _.datosGuias.recipientCalle2 = value;
                       }),
@@ -233,6 +233,7 @@ class GeneraGuiaPage extends StatelessWidget {
                     hintText: "Ciudad destinatario",
                     labelText: "Ciudad",
                     suffixIcon: Icons.map_rounded,
+                    textValue: _.hintDes.ciudad,
                     onChanged: (value) {
                       _.datosGuias.recipientCiudad = value;
                     },
@@ -241,6 +242,7 @@ class GeneraGuiaPage extends StatelessWidget {
                     hintText: "Estado destinatario",
                     labelText: "Estado",
                     suffixIcon: Icons.terrain_rounded,
+                    textValue: _.hintDes.estado,
                     onChanged: (value) {
                       _.datosGuias.recipientEstado = value;
                     },
@@ -254,7 +256,9 @@ class GeneraGuiaPage extends StatelessWidget {
                     labelText: "Alto",
                     keyboard: TextInputType.number,
                     suffixIcon: Icons.height_rounded,
-                    textValue: _.datosGuias.packageLineItemAlto.toString(),
+                    textValue: (_.datosGuias.packageLineItemAlto != null)
+                        ? _.datosGuias.packageLineItemAlto.toString()
+                        : "0",
                     onChanged: (value) {
                       _.datosGuias.packageLineItemAlto = int.parse(value);
                     },
@@ -264,7 +268,9 @@ class GeneraGuiaPage extends StatelessWidget {
                     labelText: "Largo",
                     keyboard: TextInputType.number,
                     suffixIcon: Icons.arrow_right_alt_rounded,
-                    textValue: _.datosGuias.packageLineItemAlto.toString(),
+                    textValue: (_.datosGuias.packageLineItemAlto != null)
+                        ? _.datosGuias.packageLineItemAlto.toString()
+                        : "0",
                     onChanged: (value) {
                       _.datosGuias.packageLineItemLargo = int.parse(value);
                     },
@@ -274,7 +280,9 @@ class GeneraGuiaPage extends StatelessWidget {
                     labelText: "Ancho",
                     keyboard: TextInputType.number,
                     suffixIcon: Icons.open_in_full_rounded,
-                    textValue: _.datosGuias.packageLineItemAncho.toString(),
+                    textValue: (_.datosGuias.packageLineItemAncho != null)
+                        ? _.datosGuias.packageLineItemAncho.toString()
+                        : "0",
                     onChanged: (value) {
                       _.datosGuias.packageLineItemAncho = int.parse(value);
                     },
@@ -284,7 +292,7 @@ class GeneraGuiaPage extends StatelessWidget {
                     labelText: "Peso",
                     keyboard: TextInputType.number,
                     suffixIcon: Icons.line_weight_rounded,
-                    textValue: _.datosGuias.packageLineItemPeso.toString(),
+                    textValue: (_.datosGuias.packageLineItemPeso != null)?_.datosGuias.packageLineItemPeso.toString():"0",
                     onChanged: (String value) {
                       _.datosGuias.packageLineItemPeso = int.parse(value);
                     },
@@ -294,7 +302,9 @@ class GeneraGuiaPage extends StatelessWidget {
                     labelText: "Seguro",
                     keyboard: TextInputType.number,
                     suffixIcon: Icons.shield,
-                    textValue: _.datosGuias.packageLineItemValor.toString(),
+                    textValue: (_.datosGuias.packageLineItemValor != null)
+                        ? _.datosGuias.packageLineItemValor.toString()
+                        : "0",
                     onChanged: (value) {
                       _.datosGuias.packageLineItemValor = value;
                     },
