@@ -143,7 +143,9 @@ class ColoniaSugest {
   String ciudad;
   String estado;
 
-  ColoniaSugest({this.colonias, this.ciudad = "", this.estado = ""}) { this.colonias = [];}
+  ColoniaSugest({this.colonias, this.ciudad = "", this.estado = ""}) {
+    this.colonias = [];
+  }
 }
 
 class GeneraGuiaController extends GetxController {
@@ -453,7 +455,6 @@ class GeneraGuiaController extends GetxController {
 
 //direcciones
   void getDirs(String cp, int tipo) {
-
     if (tipo == 1) {
       _hintRem.colonias.clear();
       _hintRem.ciudad = "";
@@ -463,7 +464,7 @@ class GeneraGuiaController extends GetxController {
       _hintDes.ciudad = "";
       _hintDes.estado = "";
     }
-print('entro');
+    print('entro');
     if (this._isFedex) {
       this._getDirFedex(cp).then((value) {
         if (value != null) {
