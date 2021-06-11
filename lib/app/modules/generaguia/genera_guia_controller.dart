@@ -11,68 +11,8 @@ import 'package:globalpaq_app/app/data/repositories/remote/estafeta_repository.d
 import 'package:globalpaq_app/app/data/repositories/remote/fedex_repository.dart';
 import 'package:globalpaq_app/app/data/repositories/remote/paquetexp_repository.dart';
 import 'package:globalpaq_app/app/data/repositories/remote/redpack_repository.dart';
+import 'package:globalpaq_app/app/utils/constatnts.dart';
 
-const List<int> tipoFedex = [
-  1,
-  2,
-  3,
-  4,
-  5,
-  6,
-  7,
-  8,
-  9,
-  10,
-  11,
-  14,
-  17,
-  33,
-  34,
-  35,
-  36,
-  41,
-  42,
-  43,
-  44,
-  50,
-  51,
-  52,
-  53,
-  54,
-  55,
-  56,
-  57,
-  58,
-  59,
-  60,
-  61,
-];
-const List<int> tipoDhl = [
-  12,
-  13,
-  18,
-  19,
-  20,
-  21,
-  24,
-  31,
-  32,
-  39,
-  40,
-];
-const List<int> tipoRedpack = [26, 27];
-const List<int> tipoPaquetexp = [48, 49];
-const List<int> tipoEstafeta = [
-  15,
-  16,
-  22,
-  23,
-  28,
-  29,
-  30,
-  37,
-  38,
-];
 
 class DatosGuia {
   int guiaTipo;
@@ -202,6 +142,7 @@ class GeneraGuiaController extends GetxController {
   void onReady() {
     super.onReady();
     this.init();
+    
   }
 
 //funciones
