@@ -35,28 +35,28 @@ class EnviosPage extends StatelessWidget {
                       ),
                     ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () => _.getHistorial('Dhl'),
                       child: Padding(
                         padding: const EdgeInsets.all(defaultPadding / 2),
                         child: Text('DHL'),
                       ),
                     ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () => _.getHistorial('Estafeta'),
                       child: Padding(
                         padding: const EdgeInsets.all(defaultPadding / 2),
                         child: Text('Estafeta'),
                       ),
                     ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () => _.getHistorial('Redpack'),
                       child: Padding(
                         padding: const EdgeInsets.all(defaultPadding / 2),
                         child: Text('Redpack'),
                       ),
                     ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () => _.getHistorial('Paquetexp'),
                       child: Padding(
                         padding: const EdgeInsets.all(defaultPadding / 2),
                         child: Text('Paquetexpress'),
@@ -74,7 +74,7 @@ class EnviosPage extends StatelessWidget {
                           itemBuilder: (context, index) => Padding(
                             padding: const EdgeInsets.symmetric(
                                 vertical: defaultPadding / 2),
-                            child: HistorialCard(),
+                            child: HistorialCard(historial: _.historial[index]),
                           ),
                         ),
                       ),
@@ -88,7 +88,9 @@ class EnviosPage extends StatelessWidget {
 }
 
 class HistorialCard extends StatelessWidget {
-  const HistorialCard({Key key}) : super(key: key);
+  const HistorialCard({Key key, @required this.historial}) : super(key: key);
+
+  final HistorialResponse historial;
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +106,7 @@ class HistorialCard extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(defaultPadding / 2),
                 child: Text(
-                  "FEDEX TERRESTRE NACIONAL MEBA 1 (65 KG)",
+                  "${historial.tipoguia} (${historial.pesoguia} KG)",
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                 ),
               ),
@@ -112,7 +114,7 @@ class HistorialCard extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
                 child: Text(
-                  "GUIA: 12345678978955",
+                  "GUIA: ${historial.tracking}",
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                 ),
               ),
@@ -122,7 +124,7 @@ class HistorialCard extends StatelessWidget {
                   Container(
                     width: (Get.width * 0.5) - (defaultPadding * 3),
                     child: Text(
-                      'Remitente:\nSoluciones de Desarollo empresarial globalpaq s.a. de c.v.',
+                      'Remitente:\n${historial.nombrer}',
                       overflow: TextOverflow.ellipsis,
                       maxLines: 3,
                     ),
@@ -130,7 +132,7 @@ class HistorialCard extends StatelessWidget {
                   Container(
                     width: (Get.width * 0.5) - (defaultPadding * 3),
                     child: Text(
-                      'Destinatario: \nSoluciones de Desarollo empresarial globalpaq s.a. de c.v.',
+                      'Destinatario: \n${historial.nombred}',
                       overflow: TextOverflow.ellipsis,
                       maxLines: 3,
                     ),

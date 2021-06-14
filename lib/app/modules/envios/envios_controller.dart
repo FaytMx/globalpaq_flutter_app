@@ -1,5 +1,9 @@
 import 'package:get/get.dart';
+import 'package:globalpaq_app/app/data/models/responses/dhl/dhl_historial_response.dart';
+import 'package:globalpaq_app/app/data/models/responses/estafeta/estafeta_historial_response.dart';
 import 'package:globalpaq_app/app/data/models/responses/fedex/fedex_historial_response.dart';
+import 'package:globalpaq_app/app/data/models/responses/paquetexp/paquetexp_historial_response.dart';
+import 'package:globalpaq_app/app/data/models/responses/redpack/redpack_historial_response.dart';
 import 'package:globalpaq_app/app/data/repositories/remote/dhl_repository.dart';
 import 'package:globalpaq_app/app/data/repositories/remote/estafeta_repository.dart';
 import 'package:globalpaq_app/app/data/repositories/remote/fedex_repository.dart';
@@ -67,6 +71,79 @@ class EnviosController extends GetxController {
         // print(this._historial);
         update();
         break;
+      case 'Dhl':
+        List<DhlHistorialResponse> resultado =
+            await this._dhlRepository.getHistorial();
+
+        this._historial = resultado
+            .map((e) => new HistorialResponse(
+                  tipoguia: e.tipoguia,
+                  pesoguia: e.pesoguia,
+                  filename: e.rutapdf,
+                  nombrer: e.nombrer,
+                  nombred: e.nombred,
+                  tracking: e.tracking,
+                  fecha: e.fecha,
+                ))
+            .toList();
+        update();
+
+        break;
+      case 'Estafeta':
+        List<EstafetaHistorialResponse> resultado =
+            await this._estafetaRepository.getEstafetaHistorial();
+
+        this._historial = resultado
+            .map((e) => new HistorialResponse(
+                  tipoguia: e.tipoguia,
+                  pesoguia: e.pesoguia,
+                  filename: e.rutapdf,
+                  nombrer: e.nombrer,
+                  nombred: e.nombred,
+                  tracking: e.tracking,
+                  fecha: e.fecha,
+                ))
+            .toList();
+        update();
+
+        break;
+      case 'Redpack':
+        List<RedpackHistorialResponse> resultado =
+            await this._redpackRepository.getRedpackHistorial();
+
+        this._historial = resultado
+            .map((e) => new HistorialResponse(
+                  tipoguia: e.tipoguia,
+                  pesoguia: e.pesoguia,
+                  filename: e.rutapdf,
+                  nombrer: e.nombrer,
+                  nombred: e.nombred,
+                  tracking: e.tracking,
+                  fecha: e.fecha,
+                ))
+            .toList();
+        update();
+
+        break;
+      case 'Paquetexp':
+        List<PaquetexpHistorialResponse> resultado =
+            await this._paquetexpRepository.getPaquetexpHistorial();
+
+        this._historial = resultado
+            .map((e) => new HistorialResponse(
+                  tipoguia: e.tipoguia,
+                  pesoguia: e.pesoguia,
+                  filename: e.rutapdf,
+                  nombrer: e.nombrer,
+                  nombred: e.nombred,
+                  tracking: e.tracking,
+                  fecha: e.fecha,
+                ))
+            .toList();
+        update();
+
+        break;
+
       default:
     }
   }
