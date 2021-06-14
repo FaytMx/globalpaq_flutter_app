@@ -33,7 +33,7 @@ class RedpackCobertura {
   });
 
   final String descripcion;
-  final int entregaEstimada;
+  final dynamic entregaEstimada;
   final String servicio;
   final String entrega;
 

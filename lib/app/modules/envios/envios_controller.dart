@@ -60,7 +60,8 @@ class EnviosController extends GetxController {
             .map((e) => new HistorialResponse(
                   tipoguia: e.tipoguia,
                   pesoguia: e.pesoguia,
-                  filename: e.filename,
+                  filename:
+                      "https://sistema.globalpaq.mx/fedex/guias/${e.filename}",
                   nombrer: e.nombrer,
                   nombred: e.nombred,
                   tracking: e.tracking,
@@ -79,7 +80,8 @@ class EnviosController extends GetxController {
             .map((e) => new HistorialResponse(
                   tipoguia: e.tipoguia,
                   pesoguia: e.pesoguia,
-                  filename: e.rutapdf,
+                  filename:
+                      "https://sistema1.globalpaq.mx:5001/guia/${e.tracking}",
                   nombrer: e.nombrer,
                   nombred: e.nombred,
                   tracking: e.tracking,
@@ -97,7 +99,8 @@ class EnviosController extends GetxController {
             .map((e) => new HistorialResponse(
                   tipoguia: e.tipoguia,
                   pesoguia: e.pesoguia,
-                  filename: e.rutapdf,
+                  filename:
+                      "https://sistema.globalpaq.mx/estafeta/guias/${e.rutapdf}",
                   nombrer: e.nombrer,
                   nombred: e.nombred,
                   tracking: e.tracking,
@@ -115,7 +118,8 @@ class EnviosController extends GetxController {
             .map((e) => new HistorialResponse(
                   tipoguia: e.tipoguia,
                   pesoguia: e.pesoguia,
-                  filename: e.rutapdf,
+                  filename:
+                      "https://sistema.globalpaq.mx/redpack/guias/${e.rutapdf}",
                   nombrer: e.nombrer,
                   nombred: e.nombred,
                   tracking: e.tracking,
@@ -133,7 +137,8 @@ class EnviosController extends GetxController {
             .map((e) => new HistorialResponse(
                   tipoguia: e.tipoguia,
                   pesoguia: e.pesoguia,
-                  filename: e.rutapdf,
+                  filename:
+                      "https://globalpaq.com.mx:8001/api/guia/${e.tracking}",
                   nombrer: e.nombrer,
                   nombred: e.nombred,
                   tracking: e.tracking,

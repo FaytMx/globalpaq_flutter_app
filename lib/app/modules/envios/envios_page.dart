@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:globalpaq_app/app/modules/envios/envios_controller.dart';
 import 'package:globalpaq_app/app/utils/constatnts.dart';
 
@@ -92,6 +93,18 @@ class HistorialCard extends StatelessWidget {
 
   final HistorialResponse historial;
 
+  void _launchURL(String url) async {
+    try {
+      if (await canLaunch(url)) {
+        await launch(url);
+      }else {
+        print('false');
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -143,7 +156,9 @@ class HistorialCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   TextButton.icon(
-                      onPressed: () {},
+                      onPressed: () {
+                        _launchURL(historial.filename);
+                      },
                       icon: Icon(Icons.download),
                       label: Text('Descargar')),
                 ],
