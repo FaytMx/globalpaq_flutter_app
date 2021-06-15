@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:globalpaq_app/app/modules/home/widgets/header.dart';
 import 'package:globalpaq_app/app/modules/home/widgets/my_fiels.dart';
-import 'package:globalpaq_app/app/modules/home/widgets/recent_files.dart';
 import 'package:globalpaq_app/app/modules/home/widgets/storage_details.dart';
 import 'package:globalpaq_app/app/modules/home/widgets/user_details.dart';
 import 'package:globalpaq_app/app/utils/constatnts.dart';

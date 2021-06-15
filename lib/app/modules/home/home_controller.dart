@@ -59,7 +59,7 @@ class HomeController extends GetxController {
     }
   }
 
-  Future<void> logout() {
+  void logout() {
     _localAuthRepository.clearSession();
     Get.offAllNamed(AppRoutes.SPLASH);
   }
@@ -117,8 +117,8 @@ class HomeController extends GetxController {
     return myChart;
   }
 
-  Future<void> _fedexTest() async {
-    try {
+  // Future<void> _fedexTest() async {
+  //   try {
       // var guia = new FedexPostGuiaRequest(
       //   guiaTipo: 17,
       //   guiaPeso: 15,
@@ -147,10 +147,10 @@ class HomeController extends GetxController {
       // var datos = await _fedexRepository.postFedexGuia(guia);
       // print(datos);
 
-    } catch (e) {
-      print(e);
-    }
-  }
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
 
   void controlMenu() {
     if (!_scaffoldKey.currentState.isDrawerOpen) {

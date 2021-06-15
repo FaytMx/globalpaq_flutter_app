@@ -10,6 +10,13 @@ import 'package:globalpaq_app/app/data/repositories/remote/fedex_repository.dart
 import 'package:globalpaq_app/app/data/repositories/remote/paquetexp_repository.dart';
 import 'package:globalpaq_app/app/data/repositories/remote/redpack_repository.dart';
 
+class CoberturaPaqueterias {
+  String cobertura;
+  String ocurre;
+  List<dynamic> servicios;
+  CoberturaPaqueterias({this.cobertura, this.servicios, this.ocurre});
+}
+
 class CoberturaController extends GetxController {
   //servicios
   final FedexRepository _fedexRepository = Get.find<FedexRepository>();
@@ -19,17 +26,17 @@ class CoberturaController extends GetxController {
   final PaquetexpRepository _paquetexpRepository =
       Get.find<PaquetexpRepository>();
   //datos
-  var _coberturaFedex = [];
-  var _coberturaDhl = [];
-  var _coberturaEstafeta = [];
-  var _coberturaRedpack = [];
-  var _coberturPaquetexp = [];
+  CoberturaPaqueterias _coberturaFedex;
+  CoberturaPaqueterias _coberturaDhl;
+  CoberturaPaqueterias _coberturaEstafeta;
+  CoberturaPaqueterias _coberturaRedpack;
+  CoberturaPaqueterias _coberturPaquetexp;
 
-  get coberturaFedex => _coberturaFedex;
-  get coberturaDhl => _coberturaDhl;
-  get coberturaEstafeta => _coberturaEstafeta;
-  get coberturaRedpack => _coberturaRedpack;
-  get coberturaPaquetexp => _coberturPaquetexp;
+  CoberturaPaqueterias get coberturaFedex => _coberturaFedex;
+  CoberturaPaqueterias get coberturaDhl => _coberturaDhl;
+  CoberturaPaqueterias get coberturaEstafeta => _coberturaEstafeta;
+  CoberturaPaqueterias get coberturaRedpack => _coberturaRedpack;
+  CoberturaPaqueterias get coberturaPaquetexp => _coberturPaquetexp;
 
   String _cpOrigen;
   String _cpDestino;
@@ -55,24 +62,98 @@ class CoberturaController extends GetxController {
   //metodos
   void buscaCobertura() {
     if (_cpOrigen != null && _cpDestino != null) {
-      getCoberturas(_cpOrigen, _cpDestino);
+      getCoberturas(_cpOrigen, _cpDestino).then((value) => update());
     }
   }
 
   Future<void> getCoberturas(cpOrigen, cpDestino) async {
-    FedexCoberturaResponse resFedex =
-        await this._fedexRepository.getFedexCobertura(cpOrigen, cpDestino);
-    DhlCoberturaResponse resDhl =
-        await this._dhlRepository.getCobertura(cpOrigen, cpDestino);
-    EstafetaCoberturaResponse resEstafeta = await this
-        ._estafetaRepository
-        .getEstafetapCobertura(cpOrigen, cpDestino);
-    RedpackCoberturaResponse resRedpack =
-        await this._redpackRepository.getRedpackCobertura(cpOrigen, cpDestino);
-    PaquetexpCoberturaResponse resPaquetexp = await this
-        ._paquetexpRepository
-        .getPaquetexpCobertura(cpOrigen, cpDestino);
+    try {
+      FedexCoberturaResponse resFedex =
+          await this._fedexRepository.getFedexCobertura(cpOrigen, cpDestino);
+      _coberturaFedex = new CoberturaPaqueterias(
+          cobertura: resFedex.data.message, servicios: resFedex.data.services);
+    } catch (e) {
+      _coberturaFedex = new CoberturaPaqueterias(
+        cobertura: e.message,
+        servicios: [],
+      );
+    }
 
-    print(resPaquetexp);
+    try {
+      DhlCoberturaResponse resDhl =
+          await this._dhlRepository.getCobertura(cpOrigen, cpDestino);
+      print(resDhl);
+      _coberturaDhl = new CoberturaPaqueterias(
+        cobertura: resDhl.data.message,
+        servicios: [],
+      );
+    } catch (e) {
+      print(e);
+    }
+
+    try {
+      EstafetaCoberturaResponse resEstafeta = await this
+          ._estafetaRepository
+          .getEstafetapCobertura(cpOrigen, cpDestino);
+      print(resEstafeta);
+      _coberturaEstafeta = new CoberturaPaqueterias(
+        cobertura: resEstafeta.data.message,
+        ocurre: resEstafeta.data.ocurre,
+        servicios: [],
+      );
+    } catch (e) {
+      _coberturaEstafeta = new CoberturaPaqueterias(
+        cobertura: 'Sin Cobertura',
+        ocurre: "No",
+        servicios: [],
+      );
+      print(e);
+    }
+
+    try {
+      List<RedpackCobertura> resRedpack = await this
+          ._redpackRepository
+          .getRedpackCobertura(cpOrigen, cpDestino);
+
+      if (resRedpack[0]
+          .descripcion
+          .contains("NO SE TIENE COBERTURA PARA ESTE ENVÍO")) {
+        _coberturaRedpack = new CoberturaPaqueterias(
+          cobertura: resRedpack[0].descripcion,
+          servicios: [],
+        );
+      } else {
+        List<String> servicios = (resRedpack).map((e) => e.servicio).toList();
+
+        List<String> servs = [];
+        servicios.forEach((e) {
+          if (servs.contains(e)) {
+            print("duplicado: $e");
+          } else {
+            servs.add(e);
+          }
+        });
+
+        _coberturaRedpack = new CoberturaPaqueterias(
+          cobertura: resRedpack[0].descripcion,
+          servicios: servs,
+        );
+      }
+    } catch (e) {
+      print(e);
+    }
+
+    try {
+      PaquetexpCoberturaResponse resPaquetexp = await this
+          ._paquetexpRepository
+          .getPaquetexpCobertura(cpOrigen, cpDestino);
+      print(resPaquetexp);
+
+      var paqExp = resPaquetexp.data;
+      _coberturPaquetexp =
+          new CoberturaPaqueterias(cobertura: paqExp.message, servicios: []);
+    } catch (e) {
+      print(e);
+    }
   }
 }

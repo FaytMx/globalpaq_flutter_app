@@ -82,7 +82,7 @@ class RedpackAPI {
     return RedpackCancelResponse.fromJson(response.data);
   }
 
-  Future<RedpackCoberturaResponse> getRedpackCobertura(
+  Future<List<RedpackCobertura>> getRedpackCobertura(
       String cpOrigen, String cpDestino) async {
     String session = await _localAuthRepository.session;
 
@@ -90,7 +90,15 @@ class RedpackAPI {
         queryParameters: {"cp_origen": cpOrigen, "cp_destino": cpDestino},
         options: Options(headers: {"Authorization": session}));
 
-    return RedpackCoberturaResponse.fromJson(response.data);
+    if (!(response.data["data"] is Map)) {
+      return (response.data['data'] as List)
+          .map((e) => RedpackCobertura.fromJson(e))
+          .toList();
+    }
+
+    return (response.data['data']['servicios'] as List)
+        .map((e) => RedpackCobertura.fromJson(e))
+        .toList();
   }
 
   Future<RedpackPostGuiaData> postRedpackGuia(

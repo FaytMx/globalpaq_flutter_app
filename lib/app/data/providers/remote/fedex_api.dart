@@ -108,6 +108,12 @@ class FedexAPI {
         queryParameters: {"cp_origen": cpOrigen, "cp_destino": cpDestino},
         options: Options(headers: {"Authorization": session}));
 
+        print(response.data);
+
+        if (response.data['error'] == true) {
+           throw new Exception("No hay servicios disponibles.");
+        }
+
     return FedexCoberturaResponse.fromJson(response.data);
   }
 

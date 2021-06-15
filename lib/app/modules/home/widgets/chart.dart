@@ -7,7 +7,7 @@ class Chart extends StatelessWidget {
     Key key,
   }) : super(key: key);
 
-  List<PieChartSectionData> pieChartSelectionDatas = [
+  final List<PieChartSectionData> pieChartSelectionDatas = [
     PieChartSectionData(
       color: primaryColor,
       value: 15,

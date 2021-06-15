@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/utils.dart';
 import 'package:globalpaq_app/app/modules/home/home_controller.dart';
-import 'package:globalpaq_app/app/modules/home/widgets/storage_info_card.dart';
 import 'package:globalpaq_app/app/modules/home/widgets/user_info_card.dart';
 import 'package:globalpaq_app/app/utils/constatnts.dart';
 

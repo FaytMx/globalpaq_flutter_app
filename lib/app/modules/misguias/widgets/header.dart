@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:globalpaq_app/app/modules/misguias/mis_guias_controller.dart';
-import 'package:globalpaq_app/app/utils/constatnts.dart';
 import 'package:globalpaq_app/app/utils/responsive.dart';
 
 class Header extends StatelessWidget {

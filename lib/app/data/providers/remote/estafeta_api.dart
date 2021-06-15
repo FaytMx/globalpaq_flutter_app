@@ -91,6 +91,10 @@ class EstafetaAPI {
         queryParameters: {"cp_origen": cpOrigen, "cp_destino": cpDestino},
         options: Options(headers: {"Authorization": session}));
 
+    if (response.data['error'] == true) {
+      throw new Exception("Token Invalido");
+    }
+
     return EstafetaCoberturaResponse.fromJson(response.data);
   }
 

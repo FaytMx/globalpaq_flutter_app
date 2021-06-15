@@ -29,7 +29,7 @@ class RedpackRepository {
   Future<RedpackCancelResponse> cancelaRedpack(String tracking) =>
       _redpackAPI.cancelaRedpack(tracking);
 
-  Future<RedpackCoberturaResponse> getRedpackCobertura(
+  Future<List<RedpackCobertura>> getRedpackCobertura(
           String cpOrigen, String cpDestino) =>
       _redpackAPI.getRedpackCobertura(cpOrigen, cpDestino);
 
