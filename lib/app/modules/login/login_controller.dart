@@ -46,7 +46,7 @@ class LoginController extends GetxController {
                   Get.back();
                 })
           ],
-        ));
+        ),);
 
         return;
       }
