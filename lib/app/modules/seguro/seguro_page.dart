@@ -38,6 +38,7 @@ class SeguroPage extends StatelessWidget {
                   CreaInput(
                     hintText: "1000.00",
                     keyboard: TextInputType.number,
+                    textValue: _.valorDeclarado,
                     labelText: "Valor declarado",
                     suffixIcon: Icons.shield,
                     onChanged: (value) => _.setValorDeclarado(value),

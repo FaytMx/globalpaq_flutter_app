@@ -9,6 +9,7 @@ import 'package:globalpaq_app/app/data/providers/remote/fedex_api.dart';
 import 'package:globalpaq_app/app/data/providers/remote/login_api.dart';
 import 'package:globalpaq_app/app/data/providers/remote/paquete_express_api.dart';
 import 'package:globalpaq_app/app/data/providers/remote/redpack_api.dart';
+import 'package:globalpaq_app/app/data/providers/remote/tienda_api.dart';
 import 'package:globalpaq_app/app/data/repositories/local/local_authentication_repository.dart';
 import 'package:globalpaq_app/app/data/repositories/remote/asociado_repository.dart';
 import 'package:globalpaq_app/app/data/repositories/remote/dhl_repository.dart';
@@ -17,10 +18,9 @@ import 'package:globalpaq_app/app/data/repositories/remote/fedex_repository.dart
 import 'package:globalpaq_app/app/data/repositories/remote/login_repository.dart';
 import 'package:globalpaq_app/app/data/repositories/remote/paquetexp_repository.dart';
 import 'package:globalpaq_app/app/data/repositories/remote/redpack_repository.dart';
+import 'package:globalpaq_app/app/data/repositories/remote/tienda_repository.dart';
 
 class DependencyInjection {
-  
-
   static void init() {
     Get.lazyPut<FlutterSecureStorage>(() => FlutterSecureStorage(),
         fenix: true);
@@ -39,6 +39,7 @@ class DependencyInjection {
     Get.lazyPut(() => EstafetaAPI(), fenix: true);
     Get.lazyPut(() => RedpackAPI(), fenix: true);
     Get.lazyPut(() => PaqueteExpressAPI(), fenix: true);
+    Get.lazyPut(() => TiendaAPI(), fenix: true);
 
     //Repositories
     Get.lazyPut<LocalAuthRepository>(() => LocalAuthRepository(), fenix: true);
@@ -49,7 +50,6 @@ class DependencyInjection {
     Get.lazyPut(() => EstafetaRepository(), fenix: true);
     Get.lazyPut(() => RedpackRepository(), fenix: true);
     Get.lazyPut(() => PaquetexpRepository(), fenix: true);
+    Get.lazyPut(() => TiendaRepository(), fenix: true);
   }
-
-  
 }
