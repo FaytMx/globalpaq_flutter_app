@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:globalpaq_app/app/utils/constatnts.dart';
 import 'package:globalpaq_app/app/utils/dependency_injection.dart';
@@ -18,6 +19,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
+       localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        const Locale('en', 'US'),
+        const Locale('es', 'MX'),
+      ],
       title: 'Globalpaq APP',
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: bgColor,

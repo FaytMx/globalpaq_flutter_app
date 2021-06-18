@@ -18,6 +18,43 @@ class PedidosController extends GetxController {
     update();
   }
 
+  String _opSelBanco = "BANCOMER terminación 1738";
+  String get opSelBanco => _opSelBanco;
+  void setOpSelBanco(String value) {
+    this._opSelBanco = value;
+    update();
+  }
+
+  int _radioValue = -1;
+  int get radioValue => _radioValue;
+
+  void setRadioValue(int value) {
+    this._radioValue = value;
+    update();
+  }
+
+  int _radioFormaPagoValue = -1;
+  int get radioFormaPagoValue => _radioFormaPagoValue;
+
+  void setRadioFormaPagoValue(int value) {
+    this._radioFormaPagoValue = value;
+    update();
+  }
+
+  String _fecha = '';
+  String get fecha => _fecha;
+  void setFecha(String value) {
+    _fecha = value;
+  }
+
+  TextEditingController _inputFieldDateController = new TextEditingController();
+  TextEditingController get inputFieldDateController =>
+      _inputFieldDateController;
+  void setInputFieldDateController(String value) {
+    _inputFieldDateController.text = value;
+    update();
+  }
+
   @override
   void onReady() {
     this.init();
@@ -48,5 +85,30 @@ class PedidosController extends GetxController {
             ),
           );
     });
+  }
+
+  List<DropdownMenuItem<String>> getOpcionesBanco() {
+    List<DropdownMenuItem<String>> lista = [];
+
+    lista.add(
+      DropdownMenuItem(
+        child: Text("BANCOMER terminación 1738"),
+        value: "BANCOMER terminación 1738",
+      ),
+    );
+    lista.add(
+      DropdownMenuItem(
+        child: Text("HSBC Terminación 8684"),
+        value: "HSBC Terminación 8684",
+      ),
+    );
+    lista.add(
+      DropdownMenuItem(
+        child: Text("BBVA PAOLA 2046"),
+        value: "BBVA PAOLA 2046",
+      ),
+    );
+
+    return lista;
   }
 }
