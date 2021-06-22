@@ -1,3 +1,5 @@
+import 'dart:io';
+import 'dart:async';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:globalpaq_app/app/data/models/responses/tienda/pedidos_response.dart';
@@ -52,6 +54,14 @@ class PedidosController extends GetxController {
       _inputFieldDateController;
   void setInputFieldDateController(String value) {
     _inputFieldDateController.text = value;
+    update();
+  }
+
+  File _foto;
+  File get foto => _foto;
+
+  setFoto(File value) {
+    _foto = value;
     update();
   }
 
@@ -110,5 +120,21 @@ class PedidosController extends GetxController {
     );
 
     return lista;
+  }
+
+  void sendComprobante() async {
+    Map<String, dynamic> data = {};
+    Map<String, File> files = {};
+
+    if (this._foto != null) {
+     
+      data['idventa'] = '33770';
+      data['tipo_banco'] = '33770';
+      data['fecha_pago'] = '33770';
+      data['monto'] = '33770';
+
+      
+      await this._tiendaRepository.postCoprobantePedido(data,  this._foto);
+    }
   }
 }

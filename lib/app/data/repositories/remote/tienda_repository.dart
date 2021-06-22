@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:get/get.dart';
 import 'package:globalpaq_app/app/data/models/responses/tienda/articulos_response.dart';
 import 'package:globalpaq_app/app/data/models/responses/tienda/pedido_detalle_response.dart';
@@ -14,4 +16,8 @@ class TiendaRepository {
 
   Future<List<PedidoDetalleResponse>> getPedidoDetalle(int idVenta) =>
       _tiendaAPI.getPedidoDetalle(idVenta);
+
+  Future<void> postCoprobantePedido(
+          Map<String, dynamic> data, File file) =>
+      _tiendaAPI.postCoprobantePedido(data, file);
 }

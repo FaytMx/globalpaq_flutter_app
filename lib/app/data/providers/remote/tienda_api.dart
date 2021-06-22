@@ -1,5 +1,8 @@
+import 'dart:io';
+import 'package:http_parser/http_parser.dart';
+import 'package:path/path.dart';
 import 'package:dio/dio.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide MultipartFile, FormData;
 import 'package:globalpaq_app/app/data/models/responses/tienda/articulos_response.dart';
 import 'package:globalpaq_app/app/data/models/responses/tienda/pedido_detalle_response.dart';
 import 'package:globalpaq_app/app/data/models/responses/tienda/pedidos_response.dart';
@@ -53,5 +56,31 @@ class TiendaAPI {
     return (response.data['data'] as List)
         .map((e) => PedidoDetalleResponse.fromJson(e))
         .toList();
+  }
+
+  Future<void> postCoprobantePedido(
+      Map<String, dynamic> data, File file) async {
+    String session = await this.getToken();
+
+    String fileName = file.path.split('/').last;
+    FormData formData = FormData.fromMap({
+      "idventa": data['idventa'],
+      "tipo_banco": data['tipo_banco'],
+      "fecha_pago": data['fecha_pago'],
+      "monto": data['monto'],
+      "comprobante":
+          await MultipartFile.fromFile(file.path, filename: fileName, contentType: MediaType("image", "jpeg")),
+    });
+
+    // var formData = FormData.fromMap(data);
+    var response = await _dio.post(
+      '/tienda/comprobante',
+      data: formData,
+      options: Options(
+          headers: {"Authorization": session},
+          contentType: 'multipart/form-data'),
+    );
+
+    print(response);
   }
 }

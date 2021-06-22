@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:globalpaq_app/app/modules/generaguia/genera_guia_page.dart';
 import 'package:globalpaq_app/app/modules/pedidos/pedidos_controller.dart';
 import 'package:globalpaq_app/app/utils/constatnts.dart';
+import 'package:image_picker/image_picker.dart';
 
 class PedidosPage extends StatelessWidget {
   @override
@@ -10,54 +13,56 @@ class PedidosPage extends StatelessWidget {
     return GetBuilder<PedidosController>(
       builder: (_) => Scaffold(
         body: SafeArea(
-          child: Container(
-            padding: EdgeInsets.all(defaultPadding),
-            child: Column(
-              children: [
-                Text(
-                  "Pago",
-                  style: TextStyle(fontSize: 18),
-                ),
-                SizedBox(
-                  height: defaultPadding,
-                ),
-                if (_.listaPedidosPendientes.length > 0)
-                  Text("Seleccione su numero de operación:"),
-                if (_.listaPedidosPendientes.length > 0)
-                  _crearDropdown(
-                    _.listaPedidosPendientes,
-                    _.opcionSeleccionada,
-                    (opt) => _.setOpcionSeleccionada(opt),
+          child: SingleChildScrollView(
+            child: Container(
+              padding: EdgeInsets.all(defaultPadding),
+              child: Column(
+                children: [
+                  Text(
+                    "Pago",
+                    style: TextStyle(fontSize: 18),
                   ),
-                ListTile(
-                  title: Text("Enviar comprobante"),
-                  leading: Radio(
-                    value: 1,
-                    groupValue: _.radioValue,
-                    onChanged: (value) => _.setRadioValue(value),
-                    activeColor: Colors.green,
+                  SizedBox(
+                    height: defaultPadding,
                   ),
-                ),
-                ListTile(
-                  title: Text("Pagar con saldo prepago"),
-                  leading: Radio(
-                    value: 2,
-                    groupValue: _.radioValue,
-                    onChanged: (value) => _.setRadioValue(value),
-                    activeColor: Colors.green,
+                  if (_.listaPedidosPendientes.length > 0)
+                    Text("Seleccione su numero de operación:"),
+                  if (_.listaPedidosPendientes.length > 0)
+                    _crearDropdown(
+                      _.listaPedidosPendientes,
+                      _.opcionSeleccionada,
+                      (opt) => _.setOpcionSeleccionada(opt),
+                    ),
+                  ListTile(
+                    title: Text("Enviar comprobante"),
+                    leading: Radio(
+                      value: 1,
+                      groupValue: _.radioValue,
+                      onChanged: (value) => _.setRadioValue(value),
+                      activeColor: Colors.green,
+                    ),
                   ),
-                ),
-                Divider(),
-                if (_.radioValue == 1)
-                  EnviarComprobantePago(
-                    val: _.radioFormaPagoValue,
-                    onChanged: (value) => _.setRadioFormaPagoValue(value),
-                    items: _.getOpcionesBanco(),
-                    opSel: _.opSelBanco,
-                    onChangedSel: (opt) => _.setOpSelBanco(opt),
-                    fechaController: _.inputFieldDateController,
+                  ListTile(
+                    title: Text("Pagar con saldo prepago"),
+                    leading: Radio(
+                      value: 2,
+                      groupValue: _.radioValue,
+                      onChanged: (value) => _.setRadioValue(value),
+                      activeColor: Colors.green,
+                    ),
                   ),
-              ],
+                  Divider(),
+                  if (_.radioValue == 1)
+                    EnviarComprobantePago(
+                      val: _.radioFormaPagoValue,
+                      onChanged: (value) => _.setRadioFormaPagoValue(value),
+                      items: _.getOpcionesBanco(),
+                      opSel: _.opSelBanco,
+                      onChangedSel: (opt) => _.setOpSelBanco(opt),
+                      fechaController: _.inputFieldDateController,
+                    ),
+                ],
+              ),
             ),
           ),
         ),
@@ -86,50 +91,90 @@ class EnviarComprobantePago extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        child: Column(
-          children: [
-            ListTile(
-              title: Text("Banco"),
-              leading: Radio(
-                value: 1,
-                groupValue: val,
-                onChanged: (value) => this.onChanged(value),
-                activeColor: Colors.green,
-              ),
+    return Container(
+      child: Column(
+        children: [
+          ListTile(
+            title: Text("Banco"),
+            leading: Radio(
+              value: 1,
+              groupValue: val,
+              onChanged: (value) => this.onChanged(value),
+              activeColor: Colors.green,
             ),
-            if (val == 1) _crearDropdown(items, opSel, onChangedSel),
-            ListTile(
-              title: Text("PAYPAL(pagos@globalpaq.com)"),
-              leading: Radio(
-                value: 2,
-                groupValue: val,
-                onChanged: (value) => this.onChanged(value),
-                activeColor: Colors.green,
-              ),
+          ),
+          if (val == 1) _crearDropdown(items, opSel, onChangedSel),
+          ListTile(
+            title: Text("PAYPAL(pagos@globalpaq.com)"),
+            leading: Radio(
+              value: 2,
+              groupValue: val,
+              onChanged: (value) => this.onChanged(value),
+              activeColor: Colors.green,
             ),
-            ListTile(
-              title: Text("MERCADOPAGO(pagos@globalpaq.com)"),
-              leading: Radio(
-                value: 3,
-                groupValue: val,
-                onChanged: (value) => this.onChanged(value),
-                activeColor: Colors.green,
-              ),
+          ),
+          ListTile(
+            title: Text("MERCADOPAGO(pagos@globalpaq.com)"),
+            leading: Radio(
+              value: 3,
+              groupValue: val,
+              onChanged: (value) => this.onChanged(value),
+              activeColor: Colors.green,
             ),
-            SizedBox(
-              height: defaultPadding,
-            ),
-            _crearFecha(context, fechaController),
-            crearInput(
-                hintText: "1000.00",
-                labelText: "Monto",
-                suffixIcon: Icons.monetization_on_rounded),
-          ],
-        ),
+          ),
+          SizedBox(
+            height: defaultPadding,
+          ),
+          _crearFecha(context, fechaController),
+          crearInput(
+            hintText: "1000.00",
+            labelText: "Monto",
+            suffixIcon: Icons.monetization_on_rounded,
+          ),
+          IconButton(
+            onPressed: _seleccionarFoto,
+            icon: Icon(Icons.photo_size_select_actual_outlined),
+          ),
+          _mostrarFoto(),
+          OutlinedButton(
+              onPressed: () {
+                Get.find<PedidosController>().sendComprobante();
+              },
+              child: Text('Enviar')),
+        ],
       ),
     );
+  }
+
+  Widget _mostrarFoto() {
+    final File foto = Get.find<PedidosController>().foto;
+
+    if (foto != null) {
+      return Image.file(
+        foto,
+        fit: BoxFit.cover,
+        height: 200.0,
+      );
+    }
+    return Image(
+      image: AssetImage(foto?.path ?? 'assets/images/no-image.png'),
+      height: 200,
+      fit: BoxFit.cover,
+    );
+  }
+
+  _seleccionarFoto() {
+    _procesarImagen(ImageSource.gallery);
+  }
+
+  _procesarImagen(ImageSource origen) async {
+    final _picker = ImagePicker();
+    final PickedFile pickedFile = await _picker.getImage(source: origen);
+    if (pickedFile == null) return;
+
+    final File file = File(pickedFile.path);
+    Get.find<PedidosController>().setFoto(file);
+    if (file != null) {}
   }
 }
 
