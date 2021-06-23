@@ -12,4 +12,5 @@ class AppRoutes {
   static const SEGURO = "seguro";
   static const ACLARACIONES = "aclaraciones";
   static const GENERA_GUIA = "generaguia";
+  static const VER_PEDIDOS = "verpedidos";
 }

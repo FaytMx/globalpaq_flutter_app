@@ -130,10 +130,24 @@ class EnviarComprobantePago extends StatelessWidget {
             hintText: "1000.00",
             labelText: "Monto",
             suffixIcon: Icons.monetization_on_rounded,
+            onChanged: (value) => Get.find<PedidosController>().setMonto(value),
+            keyboard: TextInputType.number,
+            textValue: (Get.find<PedidosController>().monto > 0)
+                ? Get.find<PedidosController>().monto.toString()
+                : "",
           ),
-          IconButton(
+          OutlinedButton(
             onPressed: _seleccionarFoto,
-            icon: Icon(Icons.photo_size_select_actual_outlined),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Icon(Icons.photo_size_select_actual_outlined),
+                SizedBox(
+                  width: 15,
+                ),
+                Text("Seleccione imagen"),
+              ],
+            ),
           ),
           _mostrarFoto(),
           OutlinedButton(

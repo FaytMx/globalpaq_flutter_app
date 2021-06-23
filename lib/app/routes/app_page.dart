@@ -25,6 +25,8 @@ import 'package:globalpaq_app/app/modules/splash/splash_binding.dart';
 import 'package:globalpaq_app/app/modules/splash/splash_page.dart';
 import 'package:globalpaq_app/app/modules/tienda/tienda_binding.dart';
 import 'package:globalpaq_app/app/modules/tienda/tienda_page.dart';
+import 'package:globalpaq_app/app/modules/ver_pedidos/ver_pedidos_binding.dart';
+import 'package:globalpaq_app/app/modules/ver_pedidos/ver_pedidos_page.dart';
 import 'package:globalpaq_app/app/routes/app_routes.dart';
 
 class AppPage {
@@ -91,6 +93,11 @@ class AppPage {
       name: AppRoutes.GENERA_GUIA,
       page: () => GeneraGuiaPage(),
       binding: GeneraGuiaBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.VER_PEDIDOS,
+      page: () => VerPedidosPage(),
+      binding: VerPedidosBinding(),
     ),
   ];
 }

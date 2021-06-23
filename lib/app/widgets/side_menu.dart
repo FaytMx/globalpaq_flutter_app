@@ -51,6 +51,13 @@ class SideMenu extends StatelessWidget {
               },
             ),
             DrawerListTile(
+              title: "Ver Pedidos",
+              svgSrc: "assets/icons/cart.svg",
+              press: () {
+                Get.toNamed(AppRoutes.VER_PEDIDOS);
+              },
+            ),
+            DrawerListTile(
               title: "Mis Envios",
               svgSrc: "assets/icons/delivery.svg",
               press: () {

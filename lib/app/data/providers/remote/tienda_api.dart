@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:http_parser/http_parser.dart';
-import 'package:path/path.dart';
+import 'package:mime_type/mime_type.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' hide MultipartFile, FormData;
 import 'package:globalpaq_app/app/data/models/responses/tienda/articulos_response.dart';
@@ -62,17 +62,24 @@ class TiendaAPI {
       Map<String, dynamic> data, File file) async {
     String session = await this.getToken();
 
+    String mimeType = mime(file.path);
+
+    if (mimeType == null) {
+      throw new Exception('Archivo no valido');
+    }
+    String miType1 = mimeType.split('/').first;
+    String miType2 = mimeType.split('/').last;
+
     String fileName = file.path.split('/').last;
     FormData formData = FormData.fromMap({
       "idventa": data['idventa'],
       "tipo_banco": data['tipo_banco'],
       "fecha_pago": data['fecha_pago'],
       "monto": data['monto'],
-      "comprobante":
-          await MultipartFile.fromFile(file.path, filename: fileName, contentType: MediaType("image", "jpeg")),
+      "comprobante": await MultipartFile.fromFile(file.path,
+          filename: fileName, contentType: MediaType(miType1, miType2)),
     });
 
-    // var formData = FormData.fromMap(data);
     var response = await _dio.post(
       '/tienda/comprobante',
       data: formData,
