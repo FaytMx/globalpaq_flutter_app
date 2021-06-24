@@ -28,10 +28,12 @@ class TiendaAPI {
     return ArticulosResponse.fromJson(response.data["data"]);
   }
 
-  Future<List<PedidosResponse>> getPedidos() async {
+  Future<List<PedidosResponse>> getPedidos(
+      String cantidad, String pagina) async {
     String session = await this.getToken();
 
     var response = await _dio.get('/tienda/pedidos',
+        queryParameters: {"cantidad": cantidad, "pagina": pagina},
         options: Options(headers: {"Authorization": session}));
 
     if (response.data["data"] is Map) {

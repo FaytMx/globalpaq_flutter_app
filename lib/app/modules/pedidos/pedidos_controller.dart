@@ -85,7 +85,7 @@ class PedidosController extends GetxController {
   }
 
   Future<List<PedidosResponse>> _getPedidosPendientes() async {
-    List<PedidosResponse> res = await _tiendaRepository.getPedidos();
+    List<PedidosResponse> res = await _tiendaRepository.getPedidos("1000","1");
 
     DateTime newDate = new DateTime.now().subtract(Duration(days: 30));
 

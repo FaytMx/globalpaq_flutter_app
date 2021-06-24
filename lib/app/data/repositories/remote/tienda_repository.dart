@@ -12,12 +12,12 @@ class TiendaRepository {
   Future<ArticulosResponse> getTiendaArticulos() =>
       _tiendaAPI.getTiendaArticulos();
 
-  Future<List<PedidosResponse>> getPedidos() => _tiendaAPI.getPedidos();
+  Future<List<PedidosResponse>> getPedidos(String cantidad, String pagina) =>
+      _tiendaAPI.getPedidos(cantidad, pagina);
 
   Future<List<PedidoDetalleResponse>> getPedidoDetalle(int idVenta) =>
       _tiendaAPI.getPedidoDetalle(idVenta);
 
-  Future<void> postCoprobantePedido(
-          Map<String, dynamic> data, File file) =>
+  Future<void> postCoprobantePedido(Map<String, dynamic> data, File file) =>
       _tiendaAPI.postCoprobantePedido(data, file);
 }
