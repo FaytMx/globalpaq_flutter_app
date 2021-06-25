@@ -95,122 +95,107 @@ class PedidosCard extends StatelessWidget {
       default:
     }
 
-    return Stack(
-      children: [
-        Container(
-          margin: EdgeInsets.symmetric(vertical: defaultPadding / 2),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(30.0),
-          ),
-          child: Card(
-            elevation: 10.0,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0)),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(10.0),
-              child: Container(
-                width: double.infinity,
-                child: Column(
-                  children: [
-                    Row(
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: defaultPadding / 2),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(30.0),
+      ),
+      child: Card(
+        elevation: 10.0,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0)),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(10.0),
+          child: Container(
+            width: double.infinity,
+            child: Row(
+              children: [
+                Container(
+                  color: colorPedido.withOpacity(0.8),
+                  width: 5,
+                  height: 130,
+                ),
+                Container(
+                  width: 150,
+                  height: 130,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("Folio",
+                          style: Theme.of(context).textTheme.headline6),
+                      Text("${pedido.idventa}",
+                          style: Theme.of(context).textTheme.headline5),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    child: Column(
                       children: [
-                        Container(
-                          color: colorPedido.withOpacity(0.8),
-                          width: 5,
-                          height: 100,
-                        ),
-                        Container(
-                          width: 150,
-                          height: 100,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("Folio",
-                                  style: Theme.of(context).textTheme.headline6),
-                              Text("${pedido.idventa}",
-                                  style: Theme.of(context).textTheme.headline5),
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            child: Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Text(
-                                      "${pedido.estatus}",
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Text("Total:"),
-                                    Text("\$${pedido.total}"),
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Text("Fecha:"),
-                                    Text("$formatted"),
-                                  ],
-                                ),
-                              ],
+                        Row(
+                          mainAxisAlignment:
+                              MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text(
+                              "${pedido.estatus}",
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold),
                             ),
-                          ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment:
+                              MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text("Total:"),
+                            Text("\$${pedido.total}"),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment:
+                              MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text("Fecha:"),
+                            Text("$formatted"),
+                          ],
+                        ),
+                        Container(
+                          child: OutlinedButton(onPressed: (){}, child: Text("Detalles")),
                         ),
                       ],
                     ),
-                    Container(
-                      padding: EdgeInsets.all(defaultPadding / 2),
-                      child: DataTable(
-                        horizontalMargin: 0,
-                        columnSpacing: defaultPadding,
-                        columns: [
-                          DataColumn(label: Text("Aticulo")),
-                          DataColumn(label: Text("Cantidad")),
-                          DataColumn(label: Text("Precio")),
-                        ],
-                        rows: [
-                          DataRow(
-                            cells: [
-                              DataCell(Text(
-                                  "CAJA SOBRES JIFFYLITE 0 18.2 * 23.9 250 PIEZAS 25 KG")),
-                              DataCell(Text("1")),
-                              DataCell(Text("7779.99")),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
+              ],
             ),
           ),
         ),
-        Positioned(
-          bottom: -10,
-          left: ((Get.width) / 2) - defaultPadding * 2.5,
-          child: Container(
-            child: Center(
-              child: IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.arrow_drop_down_circle_outlined),
-              ),
-            ),
-          ),
-        ),
-      ],
+      ),
     );
   }
 }
+
+
+// Container(
+//                       padding: EdgeInsets.all(defaultPadding / 2),
+//                       child: DataTable(
+//                         horizontalMargin: 0,
+//                         columnSpacing: defaultPadding,
+//                         columns: [
+//                           DataColumn(label: Text("Aticulo")),
+//                           DataColumn(label: Text("Cantidad")),
+//                           DataColumn(label: Text("Precio")),
+//                         ],
+//                         rows: [
+//                           DataRow(
+//                             cells: [
+//                               DataCell(Text(
+//                                   "CAJA SOBRES JIFFYLITE 0 18.2 * 23.9 250 PIEZAS 25 KG")),
+//                               DataCell(Text("1")),
+//                               DataCell(Text("7779.99")),
+//                             ],
+//                           ),
+//                         ],
+//                       ),
+//                     ),
