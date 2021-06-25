@@ -45,6 +45,8 @@ dependencies:
   http_parser: ^4.0.0
   mime_type: ^1.0.0
   intl: ^0.17.0
+  slimy_card: ^1.0.4
+  expandable: ^5.0.1
 
 dev_dependencies:
   flutter_test:

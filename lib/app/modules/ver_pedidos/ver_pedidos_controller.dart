@@ -26,18 +26,16 @@ class VerPedidosController extends GetxController {
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
+        // print(
+        //     "🎃 ${_scrollController.position.pixels} - ${_scrollController.position.maxScrollExtent}");
 
-            print("🎃 ${_scrollController.position.pixels} - ${ _scrollController.position.maxScrollExtent}");
-
-        _pagina += 1;
         getPedidos();
-        // Timer(Duration(milliseconds: 1), () => _scrollController.jumpTo(_scrollController.initialScrollOffset));
-        Timer(
-            Duration(milliseconds: 1),
-            () => _scrollController.animateTo(
-                _scrollController.initialScrollOffset,
-                curve: Curves.linear,
-                duration: Duration(milliseconds: 500)));
+        // Timer(
+        //     Duration(milliseconds: 1),
+        //     () => _scrollController.animateTo(
+        //         _scrollController.initialScrollOffset,
+        //         curve: Curves.linear,
+        //         duration: Duration(milliseconds: 500)));
       }
     });
   }
@@ -47,13 +45,21 @@ class VerPedidosController extends GetxController {
       _isLoading = true;
       update();
       List<PedidosResponse> res =
-          await _tiendaRepository.getPedidos("10", "$_pagina");
+          await _tiendaRepository.getPedidos("15", "$_pagina");
 
-      this._pedidos = res;
-      await Future.delayed(Duration(milliseconds: 1000));
+      if (res.length > 0) {
+        this._pedidos.addAll(res);
+        await Future.delayed(Duration(milliseconds: 1000));
+        _isLoading = false;
+        _pagina += 1;
+        update();
+      } else {
+        _isLoading = false;
+        update();
+      }
+    } catch (e) {
       _isLoading = false;
       update();
-    } catch (e) {
       print(e);
     }
   }
